@@ -79,6 +79,8 @@ const Index = () => {
         data={data}
         renderItem={renderRecentTransactions}
         scrollEnabled={true}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
       />
     </SafeAreaView>
   );

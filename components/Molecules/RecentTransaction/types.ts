@@ -10,4 +10,5 @@ export type RecentTransactionItemType = {
 
 export type RecentTransactionType = {
   item: RecentTransactionItemType;
+  className?: string;
 };

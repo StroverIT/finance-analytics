@@ -5,7 +5,6 @@ import { useFonts } from "expo-font";
 import { useEffect } from "react";
 import { registerForPushNotificationsAsync } from "@/lib/expo-notifications";
 
-
 SplashScreen.preventAutoHideAsync();
 
 Notifications.setNotificationHandler({
@@ -37,8 +36,11 @@ export default function RootLayout() {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="authenciation" options={{ headerShown: false }} />
-      <Stack.Screen name="application" options={{ headerShown: false }} />
+      <Stack.Screen name="authentication" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="/application/(application)"
+        options={{ headerShown: false }}
+      />
       <Stack.Screen name="+not-found" options={{ headerShown: false }} />
     </Stack>
   );

@@ -1,5 +1,5 @@
 import { FlatList, SafeAreaView } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { RecentTransaction } from "@/components/Molecules/RecentTransaction/RecentTransaction";
 import TopSide from "@/components/Screens/HomeScreen/Topside";
@@ -72,6 +72,19 @@ const Index = () => {
     <RecentTransaction item={item} />
   );
 
+  useEffect(() => {
+    const init = async () => {
+      console.log("test+++ are brat");
+      try {
+        const test = await fetch("http://192.168.1.6:3000/api/v1/emojis");
+        const res = await test.json();
+        console.log("test+++", res);
+      } catch (e) {
+        console.log("test+++ error", e);
+      }
+    };
+    init();
+  }, []);
   return (
     <SafeAreaView>
       <FlatList

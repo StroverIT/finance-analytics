@@ -76,7 +76,7 @@ const Index = () => {
     const init = async () => {
       console.log("test+++ are brat");
       try {
-        const test = await fetch("http://192.168.1.6:3000/api/v1/emojis");
+        const test = await fetch("http://192.168.1.3:3000/api/v1/emojis");
         const res = await test.json();
         console.log("test+++", res);
       } catch (e) {

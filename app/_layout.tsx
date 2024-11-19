@@ -2,8 +2,9 @@ import { SplashScreen, Stack } from "expo-router";
 import "@/global.css";
 import * as Notifications from "expo-notifications";
 import { useFonts } from "expo-font";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { registerForPushNotificationsAsync } from "@/lib/expo-notifications";
+import { AppProvider } from "@/hooks/context/useAppProvider/useAppProvider";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -31,17 +32,19 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="authentication" options={{ headerShown: false }} />
-      <Stack.Screen
-        name="/application/(application)"
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen name="+not-found" options={{ headerShown: false }} />
-    </Stack>
+    <AppProvider>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="authentication" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="/application/(application)"
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name="+not-found" options={{ headerShown: false }} />
+      </Stack>
+    </AppProvider>
   );
 }

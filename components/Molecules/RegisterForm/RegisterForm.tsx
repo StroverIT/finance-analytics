@@ -7,19 +7,33 @@ import Button from "@/components/Atoms/Button";
 import { router } from "expo-router";
 import Row from "@/components/layout/Row";
 import Col from "@/components/layout/Col";
+import auth from "@react-native-firebase/auth";
 
 export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
+  const [isLoading, setLoading] = useState(false);
+
   const [name, setName] = useState("");
   const [secondName, setSecondName] = useState("");
   const [email, setEmail] = useState("");
-  const [text, setText] = useState("");
+  const [password, setPassword] = useState("");
 
   const changeName = (newName: string) => setName(newName);
   const changeSecondName = (newSecondName: string) =>
     setSecondName(newSecondName);
   const changeEmail = (newEmail: string) => setEmail(newEmail);
-  const changeText = (newText: string) => setText(newText);
-  const submitHandler = () => router.push("/authenciation/register");
+  const changePassword = (newPassword: string) => setPassword(newPassword);
+
+  const registerHandler = async () => {
+    setLoading(true);
+    console.log("vliza li vuobshte?");
+    try {
+      const res = await auth().createUserWithEmailAndPassword(email, password);
+      console.log("test+++", res);
+    } catch (e) {
+      console.log(e);
+    }
+    setLoading(false);
+  };
 
   return (
     <KeyboardAvoidingView enabled={true} behavior="height">
@@ -52,16 +66,16 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
             label="И-мейл"
           />
           <Input
-            value={text}
+            value={password}
             placeholder="*****"
-            onChangeText={changeText}
+            onChangeText={changePassword}
             label="Парола"
             secureTextEntry
           />
         </View>
       </View>
       <View className="mt-4">
-        <Button text="Изпрати" onPress={() => console.log("Pressed")} />
+        <Button text="Изпрати" onPress={registerHandler} />
       </View>
     </KeyboardAvoidingView>
   );

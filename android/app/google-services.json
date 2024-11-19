@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "304528288925",
+    "project_id": "finance-8cf44",
+    "storage_bucket": "finance-8cf44.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:304528288925:android:e7cd1d01ad41904486b874",
+        "android_client_info": {
+          "package_name": "com.strover.finance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "304528288925-6tva1chha1884m5doud0h2p35duqll75.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.strover.finance",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "304528288925-6bg45poqk58bkd0qmcugjhru59j6mppr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoHpJrATapszRX6_FFOokPbqNkWHVSdEo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "304528288925-6bg45poqk58bkd0qmcugjhru59j6mppr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "304528288925-qded4pr8vl171d0ri4mbt4cnmr284v0e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.strover.finance"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

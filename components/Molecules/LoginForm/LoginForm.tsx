@@ -6,20 +6,38 @@ import Checkbox from "expo-checkbox";
 import { styles } from "./styles";
 import Button from "@/components/Atoms/Button";
 import { router } from "expo-router";
+import { auth } from "@/lib/firebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export const LoginForm: FC<LoginFormProps> = ({ className }) => {
   const [email, setEmail] = useState("");
-  const [text, setText] = useState("");
+  const [password, setPassword] = useState("");
   const [isChecked, setChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const changeEmail = (newEmail: string) => setEmail(newEmail);
-  const changeText = (newText: string) => setText(newText);
+  const changePassword = (newText: string) => setPassword(newText);
   const onRegisterPress = () => {
     router.push("/authentication/register");
   };
 
+  const onLoginPress = async () => {
+    setLoading(true);
+    setError("");
+    // Add your login logic here
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      // There is firebase error but can't find it for now
+    } catch (e) {
+      setError("Невалидни данни");
+    }
+    setLoading(false);
+  };
+
   return (
     <KeyboardAvoidingView enabled={true} behavior="height">
+      {error && <Text className="text-red-500 text-center">{error}</Text>}
       <View className={`gap-4`}>
         <Input
           value={email}
@@ -28,9 +46,9 @@ export const LoginForm: FC<LoginFormProps> = ({ className }) => {
           label="И-мейл"
         />
         <Input
-          value={text}
+          value={password}
           placeholder="*****"
-          onChangeText={changeText}
+          onChangeText={changePassword}
           label="Парола"
           secureTextEntry
         />
@@ -52,7 +70,7 @@ export const LoginForm: FC<LoginFormProps> = ({ className }) => {
         </View>
       </View>
       <View>
-        <Button text="Вход" onPress={() => console.log("Pressed")} />
+        <Button text="Вход" onPress={onLoginPress} />
       </View>
       <View>
         <Text className="text-center text-gray-500 text-sm mt-5">

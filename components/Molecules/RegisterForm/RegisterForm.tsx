@@ -2,35 +2,37 @@ import { View, KeyboardAvoidingView, Text } from "react-native";
 import React, { FC, useState } from "react";
 import { RegisterFormProps } from "./types";
 import Input from "@/components/Atoms/Input";
-import { styles } from "./styles";
 import Button from "@/components/Atoms/Button";
-import { router } from "expo-router";
-import Row from "@/components/layout/Row";
-import Col from "@/components/layout/Col";
-import auth from "@react-native-firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/lib/firebaseConfig";
 
 export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
   const [isLoading, setLoading] = useState(false);
 
-  const [name, setName] = useState("");
-  const [secondName, setSecondName] = useState("");
+  // const [name, setName] = useState("");
+  // const [secondName, setSecondName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const changeName = (newName: string) => setName(newName);
-  const changeSecondName = (newSecondName: string) =>
-    setSecondName(newSecondName);
+  // const changeName = (newName: string) => setName(newName);
+  // const changeSecondName = (newSecondName: string) =>
+  // setSecondName(newSecondName);
   const changeEmail = (newEmail: string) => setEmail(newEmail);
   const changePassword = (newPassword: string) => setPassword(newPassword);
 
   const registerHandler = async () => {
     setLoading(true);
-    console.log("vliza li vuobshte?");
     try {
-      const res = await auth().createUserWithEmailAndPassword(email, password);
-      console.log("test+++", res);
-    } catch (e) {
-      console.log(e);
+      await createUserWithEmailAndPassword(auth, email, password);
+      // There is firebase error but can't find it for now
+    } catch (e: any) {
+      const code = e.code;
+
+      if (code.includes("auth/email-already-in-use"))
+        return setError("Този имейл вече съществува");
+
+      setError("Невалидни данни");
     }
     setLoading(false);
   };
@@ -38,7 +40,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
   return (
     <KeyboardAvoidingView enabled={true} behavior="height">
       <View className="gap-4 mt-5">
-        <View style={styles.container}>
+        {/* <View style={styles.container}>
           <Row className="gap-4">
             <Col numRows={1}>
               <Input
@@ -57,7 +59,8 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
               />
             </Col>
           </Row>
-        </View>
+        </View> */}
+        {error && <Text className="text-red-500 text-center">{error}</Text>}
         <View className={`gap-4`}>
           <Input
             value={email}

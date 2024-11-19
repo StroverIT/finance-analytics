@@ -43,7 +43,7 @@ const Register = () => {
           </Text>
           <RegisterForm />
           <LineWithText text="ИЛИ" />
-          <SocialMediaButtons />
+          {!__DEV__ && <SocialMediaButtons />}
         </View>
       </SafeAreaView>
     </ScrollView>

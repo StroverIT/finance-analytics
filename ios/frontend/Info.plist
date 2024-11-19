@@ -37,6 +37,18 @@
           <string>com.googleusercontent.apps.304528288925-qded4pr8vl171d0ri4mbt4cnmr284v0e</string>
         </array>
       </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>exp+frontend</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.googleusercontent.apps.976590757431-eeon3frn6neugqkhtk2bt6vsom5706bd</string>
+        </array>
+      </dict>
     </array>
     <key>CFBundleVersion</key>
     <string>1</string>

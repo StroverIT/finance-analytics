@@ -8,9 +8,13 @@ import AccountIcon from "@/assets/images/icons/account.svg";
 import TransactionIcon from "@/assets/images/icons/transfer.svg";
 import PadlockIcon from "@/assets/images/icons/padlock.svg";
 import { router } from "expo-router";
+import { auth } from "@/lib/firebaseConfig";
 
 const account = () => {
-  const onLogoutPress = () => {};
+  const onLogoutPress = () => {
+    auth.signOut();
+    router.push("/authentication");
+  };
 
   const onExpensesPress = () => router.push("/application/finances/expenses");
   const onIncomePress = () => router.push("/application/finances/income");

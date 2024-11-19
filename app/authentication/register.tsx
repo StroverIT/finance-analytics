@@ -13,7 +13,7 @@ const Register = () => {
   let [fontsLoaded] = useFonts({
     Raleway_700Bold,
   });
-  const onLoginPress = () => router.push("/authenciation");
+  const onLoginPress = () => router.push("/authentication");
 
   if (!fontsLoaded) return <Text>Зарежда се...</Text>;
 

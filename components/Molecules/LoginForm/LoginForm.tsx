@@ -15,7 +15,7 @@ export const LoginForm: FC<LoginFormProps> = ({ className }) => {
   const changeEmail = (newEmail: string) => setEmail(newEmail);
   const changeText = (newText: string) => setText(newText);
   const onRegisterPress = () => {
-    router.push("/authenciation/register");
+    router.push("/authentication/register");
   };
 
   return (

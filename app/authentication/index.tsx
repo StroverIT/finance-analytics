@@ -25,9 +25,7 @@ const Index = () => {
           <Text className="text-center text-gray-500 mt-2 text-sm">
             Създай акаунт или влез със съществуващ
           </Text>
-
           {!__DEV__ && <SocialMediaButtons className="mt-10" />}
-
           <LineWithText text="ИЛИ" />
           <LoginForm />
         </View>

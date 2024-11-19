@@ -31,6 +31,12 @@
           <string>com.strover.finance</string>
         </array>
       </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.googleusercontent.apps.304528288925-qded4pr8vl171d0ri4mbt4cnmr284v0e</string>
+        </array>
+      </dict>
     </array>
     <key>CFBundleVersion</key>
     <string>1</string>

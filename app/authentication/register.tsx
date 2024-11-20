@@ -2,12 +2,15 @@ import { View, Text, SafeAreaView, ScrollView } from "react-native";
 import React from "react";
 
 import { useFonts, Raleway_700Bold } from "@expo-google-fonts/raleway";
-import SocialMediaButtons from "@/components/Organism/SocialMediaButtons";
 import LineWithText from "@/components/Atoms/LineWithText";
 import LogoWithName from "@/components/Molecules/LogoWithName";
 import RegisterForm from "@/components/Molecules/RegisterForm";
 import { router } from "expo-router";
 import AntDesign from "@expo/vector-icons/AntDesign";
+
+const SocialMediaButtons = React.lazy(
+  () => import("@/components/Organism/SocialMediaButtons")
+);
 
 const Register = () => {
   let [fontsLoaded] = useFonts({
@@ -16,7 +19,6 @@ const Register = () => {
   const onLoginPress = () => router.push("/authentication");
 
   if (!fontsLoaded) return <Text>Зарежда се...</Text>;
-
   return (
     <ScrollView className="bg-blue-100 h-screen">
       <SafeAreaView className="mx-safe-offset-6 mt-6">
@@ -42,8 +44,13 @@ const Register = () => {
             </Text>
           </Text>
           <RegisterForm />
-          <LineWithText text="ИЛИ" />
-          {!__DEV__ && <SocialMediaButtons />}
+
+          {!__DEV__ && (
+            <>
+              <LineWithText text="ИЛИ" />
+              <SocialMediaButtons />
+            </>
+          )}
         </View>
       </SafeAreaView>
     </ScrollView>

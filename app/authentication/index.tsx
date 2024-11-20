@@ -2,10 +2,14 @@ import { View, Text, SafeAreaView, ScrollView } from "react-native";
 import React from "react";
 
 import { useFonts, Raleway_700Bold } from "@expo-google-fonts/raleway";
-import SocialMediaButtons from "@/components/Organism/SocialMediaButtons";
+
 import LineWithText from "@/components/Atoms/LineWithText";
 import LogoWithName from "@/components/Molecules/LogoWithName";
 import LoginForm from "@/components/Molecules/LoginForm";
+
+const SocialMediaButtons = React.lazy(
+  () => import("@/components/Organism/SocialMediaButtons")
+);
 
 const Index = () => {
   let [fontsLoaded] = useFonts({
@@ -25,8 +29,14 @@ const Index = () => {
           <Text className="text-center text-gray-500 mt-2 text-sm">
             Създай акаунт или влез със съществуващ
           </Text>
-          {!__DEV__ && <SocialMediaButtons className="mt-10" />}
-          <LineWithText text="ИЛИ" />
+          {!__DEV__ && (
+            <>
+              <SocialMediaButtons className="mt-10" />
+
+              <LineWithText text="ИЛИ" />
+            </>
+          )}
+
           <LoginForm />
         </View>
       </SafeAreaView>

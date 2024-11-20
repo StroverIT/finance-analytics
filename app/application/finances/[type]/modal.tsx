@@ -7,8 +7,12 @@ import Button from "@/components/Atoms/Button";
 import * as ImagePicker from "expo-image-picker";
 import { ColorThemes } from "@/components/Atoms/Button/types";
 import { AppContext } from "@/hooks/context/useAppProvider/useAppProvider";
+import { ModalTypeCreationEnum } from "@/types/ModelTypes";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Modal = () => {
+  const queryClient = useQueryClient();
+
   const { user } = useContext(AppContext);
   const [value, setValue] = useState("");
   const [image, setImage] = useState<string | null>(null);
@@ -60,7 +64,7 @@ const Modal = () => {
         options
       );
       const { imageUrl, message } = await res.json();
-      console.log("test+++", imageUrl, message);
+
       if (message) {
         setImageUrl(imageUrl);
         setImage(imageUrl);
@@ -83,14 +87,28 @@ const Modal = () => {
           "Content-Type": "application/json",
         },
       };
+      let typeOfRequest;
+
+      switch (type) {
+        case ModalTypeCreationEnum.account:
+          typeOfRequest = "accountBalance";
+          break;
+
+        case ModalTypeCreationEnum.category:
+          typeOfRequest = "category";
+          break;
+      }
 
       const res = await fetch(
-        `${process.env.EXPO_PUBLIC_SERVER_IP}/accountBalance/create`,
+        `${process.env.EXPO_PUBLIC_SERVER_IP}/${typeOfRequest}/create`,
         options
       );
+
       const data = await res.json();
 
       if (data.message) {
+        queryClient.invalidateQueries({ queryKey: [type] });
+
         router.back();
       }
     } catch (e) {

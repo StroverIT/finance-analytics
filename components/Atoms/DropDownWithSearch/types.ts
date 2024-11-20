@@ -1,4 +1,10 @@
+type DataType = {
+  name: string;
+  _id: string;
+};
+
 export type DropDownWithSearchProps = {
-  data: string[];
+  data: DataType[];
   placeholder: string;
+  isFirstItem?: boolean;
 };

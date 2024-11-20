@@ -8,6 +8,7 @@ import { AppProvider } from "@/hooks/context/useAppProvider/useAppProvider";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseConfig";
 import { UserType } from "@/hooks/context/useAppProvider/types";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -18,6 +19,8 @@ Notifications.setNotificationHandler({
     shouldSetBadge: false,
   }),
 });
+
+const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const pathname = usePathname();
@@ -57,14 +60,16 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <AppProvider user={user} setUser={setUser}>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen name="+not-found" options={{ headerShown: false }} />
-      </Stack>
-    </AppProvider>
+    <QueryClientProvider client={queryClient}>
+      <AppProvider user={user} setUser={setUser}>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="+not-found" options={{ headerShown: false }} />
+        </Stack>
+      </AppProvider>
+    </QueryClientProvider>
   );
 }

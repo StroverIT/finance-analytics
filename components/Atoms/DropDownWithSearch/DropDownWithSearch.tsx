@@ -1,19 +1,35 @@
-import React, { FC, useMemo, useRef, useState } from "react";
+import React, {
+  FC,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { StyleSheet } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { DropDownWithSearchProps } from "./types";
 
 export const DropDownWithSearch: FC<DropDownWithSearchProps> = ({
-  data,
+  data = [],
   placeholder,
+  isFirstItem,
 }) => {
   const formattedData = useMemo(() => {
     return data.map((item) => {
-      return { label: item, value: item };
+      return { label: item.name, value: item._id };
     });
   }, [data]);
 
   const [value, setValue] = useState<string | null>(null);
+
+  useLayoutEffect(() => {
+    setValue(
+      isFirstItem && formattedData.length > 0
+        ? formattedData[formattedData.length - 1].value
+        : null
+    );
+  }, [formattedData]);
 
   return (
     <Dropdown

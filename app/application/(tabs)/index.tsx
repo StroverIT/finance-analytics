@@ -75,31 +75,6 @@ const Index = () => {
     <RecentTransaction item={item} />
   );
 
-  useEffect(() => {
-    const init = async () => {
-      try {
-        const headers = new Headers();
-        headers.set("Cache-Control", "no-cache");
-        headers.set("Accept", "application/json");
-        headers.set("Content-Type", "application/json");
-        headers.set("Expires", "0");
-        headers.set("User", JSON.stringify(user));
-
-        const test = await fetch(
-          `${process.env.EXPO_PUBLIC_SERVER_IP}/finance`,
-          {
-            method: "GET",
-            headers,
-          }
-        );
-        const res = await test.json();
-        console.log("test+++", res);
-      } catch (e) {
-        console.log("test+++ error", e);
-      }
-    };
-    init();
-  }, []);
   return (
     <SafeAreaView>
       <FlatList

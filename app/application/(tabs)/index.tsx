@@ -1,9 +1,10 @@
 import { FlatList, SafeAreaView } from "react-native";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { RecentTransaction } from "@/components/Molecules/RecentTransaction/RecentTransaction";
 import TopSide from "@/components/Screens/HomeScreen/Topside";
 import { RecentTransactionType } from "@/components/Molecules/RecentTransaction/types";
+import { AppContext } from "@/hooks/context/useAppProvider/useAppProvider";
 
 const data = [
   {
@@ -68,15 +69,29 @@ const data = [
 ];
 
 const Index = () => {
+  const { user } = useContext(AppContext);
+
   const renderRecentTransactions = ({ item }: RecentTransactionType) => (
     <RecentTransaction item={item} />
   );
 
   useEffect(() => {
     const init = async () => {
-      console.log("test+++ are brat");
       try {
-        const test = await fetch("http://192.168.1.3:3000/api/v1/emojis");
+        const headers = new Headers();
+        headers.set("Cache-Control", "no-cache");
+        headers.set("Accept", "application/json");
+        headers.set("Content-Type", "application/json");
+        headers.set("Expires", "0");
+        headers.set("User", JSON.stringify(user));
+
+        const test = await fetch(
+          `${process.env.EXPO_PUBLIC_SERVER_IP}/finance`,
+          {
+            method: "GET",
+            headers,
+          }
+        );
         const res = await test.json();
         console.log("test+++", res);
       } catch (e) {

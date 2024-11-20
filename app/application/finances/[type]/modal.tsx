@@ -1,13 +1,15 @@
 import { View, Text, SafeAreaView, Image } from "react-native";
-import React, { useState } from "react";
-import { useLocalSearchParams } from "expo-router";
+import React, { useContext, useState } from "react";
+import { router, useLocalSearchParams } from "expo-router";
 import HeaderWithBackBtn from "@/components/Atoms/HeaderWithBackBtn";
 import Input from "@/components/Atoms/Input";
 import Button from "@/components/Atoms/Button";
 import * as ImagePicker from "expo-image-picker";
 import { ColorThemes } from "@/components/Atoms/Button/types";
+import { AppContext } from "@/hooks/context/useAppProvider/useAppProvider";
 
 const Modal = () => {
+  const { user } = useContext(AppContext);
   const [value, setValue] = useState("");
   const [image, setImage] = useState<string | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -25,7 +27,6 @@ const Modal = () => {
   }
 
   const onChange = (text: string) => setValue(text);
-  const submit = () => {};
   const pickImage = async () => {
     try {
       // No permissions request is necessary for launching the image library
@@ -66,6 +67,34 @@ const Modal = () => {
       }
     } catch (e) {
       console.log("test+++ error", e);
+    }
+  };
+
+  const submit = async () => {
+    try {
+      const options = {
+        method: "POST",
+        body: JSON.stringify({
+          user,
+          imageUrl,
+          value,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const res = await fetch(
+        `${process.env.EXPO_PUBLIC_SERVER_IP}/accountBalance/create`,
+        options
+      );
+      const data = await res.json();
+
+      if (data.message) {
+        router.back();
+      }
+    } catch (e) {
+      console.log("test+++ e", e);
     }
   };
 

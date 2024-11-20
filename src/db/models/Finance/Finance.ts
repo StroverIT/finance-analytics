@@ -9,7 +9,7 @@ const FinanceScheme = new Schema<FinanceSchemaType>({
 
   account: {
     type: Schema.Types.ObjectId,
-    ref: "Account",
+    ref: "AccountBalance",
   },
   category: {
     type: Schema.Types.ObjectId,

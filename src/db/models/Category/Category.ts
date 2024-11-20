@@ -5,6 +5,7 @@ const CategorySchema = new Schema<CategorySchemaType>({
   name: String,
   icon: String,
 
+  userId: String,
   createdAt: {
     type: String,
     default: () => {

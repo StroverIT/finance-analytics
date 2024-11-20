@@ -2,10 +2,9 @@ import { Schema, model, models, Model } from "mongoose";
 import { AccountBalanceSchemaType } from "./types";
 
 const AccountBalanceSchema = new Schema<AccountBalanceSchemaType>({
-  account: {
-    type: Schema.Types.ObjectId,
-    ref: "Account",
-  },
+  name: String,
+  icon: String,
+  userId: String,
   balance: {
     type: Number,
     default: 0,

@@ -1,8 +1,10 @@
 import { ObjectId } from "mongoose";
 
 export type AccountBalanceSchemaType = {
-  account: ObjectId;
+  name: string;
+  icon: string;
   balance: number;
+  userId: string;
 
   _id: ObjectId;
   createdAt: string;

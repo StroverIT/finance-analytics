@@ -1,21 +1,45 @@
 import express from "express";
-import { getFirebaseAuth } from "../libs/firebaseConfig";
+import Category from "../db/models/Category";
 
 const router = express.Router();
 
-type EmojiResponse = {
-  messsage: string;
+type CategoryResponse = {
+  message: string;
 };
+type GetCategoryResponse = any;
 
-router.get<{}, EmojiResponse>("/", (req, res) => {
+interface CreateCategoryRequest {
+  user: {
+    uid: string;
+  };
+  value: string;
+  imageUrl: string;
+}
+
+router.get<{}, GetCategoryResponse>("/getAll/:userId", async (req, res) => {
+  //@ts-ignore
+  const { userId } = req.params;
+  // Rest of the code
+  const data = await Category.find({
+    userId,
+  });
+  console.log("test+++", data);
+
+  res.json(data);
+});
+
+router.post<{}, CategoryResponse>("/create", async (req, res) => {
   try {
-    let user = req.get("User");
-    if (user) user = JSON.parse(user);
-    console.log("test+++", user);
-    getFirebaseAuth();
+    const { user, value, imageUrl }: CreateCategoryRequest = req.body;
+
+    await Category.create({
+      name: value,
+      userId: user.uid,
+      icon: imageUrl,
+    });
 
     res.json({
-      messsage: "Vliza 2",
+      message: "Vliza 2",
     });
   } catch (e) {
     console.log("test+++ error", e);

@@ -35,7 +35,7 @@ const account = () => {
           </View>
           <LogoutIcon className="h-10 w-10" onPress={onLogoutPress} />
         </View>
-
+        {/* @ts-ignore */}
         <ContainerWithHeader headerText="Финанси">
           <NavigationWithIcon
             title="Разходи"

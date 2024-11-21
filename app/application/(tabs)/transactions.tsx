@@ -4,137 +4,6 @@ import TopSide from "@/components/Screens/Transactions/TopSide";
 import { RecentTransactionType } from "@/components/Molecules/RecentTransaction/types";
 import RecentTransaction from "@/components/Molecules/RecentTransaction";
 
-const sectionListData = [
-  {
-    title: "26 Nov to 30 Nov",
-    data: [
-      {
-        id: "1",
-        icon: "icon",
-        category: "Храна",
-        date: "26.11.2024",
-        amount: "50.00",
-        typeFrom: "cash",
-        type: "expense",
-      },
-      {
-        id: "2",
-        icon: "icon",
-        category: "Храна",
-        date: "25.11.2024",
-        amount: "50.00",
-        typeFrom: "cash",
-        type: "expense",
-      },
-      {
-        id: "3",
-        icon: "icon",
-        category: "Храна",
-        date: "24.11.2024",
-        amount: "50.00",
-        typeFrom: "cash",
-        type: "income",
-      },
-    ],
-  },
-  {
-    title: "19 Nov to 26 Nov",
-    data: [
-      {
-        id: "4",
-        icon: "icon",
-        category: "Храна",
-        date: "19.11.2024",
-        amount: "50.00",
-        typeFrom: "cash",
-        type: "expense",
-      },
-      {
-        id: "5",
-        icon: "icon",
-        category: "Храна",
-        date: "24.11.2024",
-        amount: "50.00",
-        typeFrom: "cash",
-        type: "expense",
-      },
-      {
-        id: "6",
-        icon: "icon",
-        category: "Храна",
-        date: "26.11.2024",
-        amount: "50.00",
-        typeFrom: "cash",
-        type: "income",
-      },
-    ],
-  },
-  {
-    title: "12 Nov to 18 Nov",
-    data: [
-      {
-        id: "7",
-        icon: "icon",
-        category: "Храна",
-        date: "19.11.2024",
-        amount: "50.00",
-        typeFrom: "cash",
-        type: "expense",
-      },
-      {
-        id: "8",
-        icon: "icon",
-        category: "Храна",
-        date: "24.11.2024",
-        amount: "50.00",
-        typeFrom: "cash",
-        type: "expense",
-      },
-      {
-        id: "9",
-        icon: "icon",
-        category: "Храна",
-        date: "26.11.2024",
-        amount: "50.00",
-        typeFrom: "cash",
-        type: "income",
-      },
-    ],
-  },
-  {
-    title: "5 Nov to 11 Nov",
-    data: [
-      {
-        id: "10",
-        icon: "icon",
-        category: "Храна",
-        date: "19.11.2024",
-        amount: "50.00",
-        typeFrom: "cash",
-        type: "expense",
-      },
-      {
-        id: "11",
-        icon: "icon",
-        category: "Храна",
-        date: "24.11.2024",
-        amount: "50.00",
-        typeFrom: "cash",
-        type: "expense",
-      },
-      {
-        id: "12",
-        icon: "icon",
-        category: "Храна",
-        date: "26.11.2024",
-        amount: "50.00",
-        typeFrom: "cash",
-        type: "income",
-      },
-    ],
-  },
-];
-
 const transactions = () => {
   const renderRecentTransactions = ({ item }: RecentTransactionType) => (
     <RecentTransaction item={item} className="bg-white" />
@@ -145,7 +14,7 @@ const transactions = () => {
         <SectionList
           ListHeaderComponent={<TopSide />}
           className="pb-10"
-          sections={sectionListData}
+          sections={[]}
           keyExtractor={(item) => item.id}
           // This must round bottom border if is last item in the list
           renderItem={renderRecentTransactions}

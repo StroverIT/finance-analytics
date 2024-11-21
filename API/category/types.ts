@@ -5,3 +5,5 @@ export type CategorySchemaType = {
   _id: string;
   createdAt: Date;
 };
+
+export type GetCategoryType = (userId: string) => Promise<CategorySchemaType[]>;

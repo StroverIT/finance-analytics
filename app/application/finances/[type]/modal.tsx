@@ -4,19 +4,18 @@ import { router, useLocalSearchParams } from "expo-router";
 import HeaderWithBackBtn from "@/components/Atoms/HeaderWithBackBtn";
 import Input from "@/components/Atoms/Input";
 import Button from "@/components/Atoms/Button";
-import * as ImagePicker from "expo-image-picker";
 import { ColorThemes } from "@/components/Atoms/Button/types";
 import { AppContext } from "@/hooks/context/useAppProvider/useAppProvider";
 import { ModalTypeCreationEnum } from "@/types/ModelTypes";
 import { useQueryClient } from "@tanstack/react-query";
+import useUploadImage from "@/hooks/useUploadImage";
 
 const Modal = () => {
   const queryClient = useQueryClient();
 
   const { user } = useContext(AppContext);
   const [value, setValue] = useState("");
-  const [image, setImage] = useState<string | null>(null);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const { image, imageUrl, uploadImageHandler } = useUploadImage();
 
   const { type } = useLocalSearchParams();
 
@@ -31,48 +30,6 @@ const Modal = () => {
   }
 
   const onChange = (text: string) => setValue(text);
-  const pickImage = async () => {
-    try {
-      // No permissions request is necessary for launching the image library
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ["images", "videos"],
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-      // @ts-ignore
-
-      const formData = new FormData();
-
-      // @ts-ignore
-      const file = result.assets[0];
-
-      // @ts-ignore
-      formData.append("image", {
-        uri: file.uri,
-        type: file.mimeType,
-        name: file.fileName,
-      });
-
-      const options = {
-        method: "POST",
-        body: formData,
-      };
-
-      const res = await fetch(
-        `${process.env.EXPO_PUBLIC_SERVER_IP}/uploadImages`,
-        options
-      );
-      const { imageUrl, message } = await res.json();
-
-      if (message) {
-        setImageUrl(imageUrl);
-        setImage(imageUrl);
-      }
-    } catch (e) {
-      console.log("test+++ error", e);
-    }
-  };
 
   const submit = async () => {
     try {
@@ -130,7 +87,7 @@ const Modal = () => {
           <Button
             text="Избери снимка от галерията"
             theme={ColorThemes.green}
-            onPress={pickImage}
+            onPress={uploadImageHandler}
           />
         </View>
         {image && <Image source={{ uri: image }} className="h-96 w-full" />}

@@ -1,22 +1,25 @@
 import React, {
-  FC,
-  useEffect,
   useLayoutEffect,
   useMemo,
-  useRef,
   useState,
+  useImperativeHandle,
+  forwardRef,
 } from "react";
-import { StyleSheet } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import { DropDownWithSearchProps } from "./types";
+import {
+  DropDownWithSearchProps,
+  DropDownWithSearchRefType,
+  RefDropDownType,
+} from "./types";
+import { styles } from "./styles";
 
-export const DropDownWithSearch: FC<DropDownWithSearchProps> = ({
-  data = [],
-  placeholder,
-  isFirstItem,
-}) => {
+// TODO: try without forwardRef
+export const DropDownWithSearch = forwardRef<
+  DropDownWithSearchRefType,
+  DropDownWithSearchProps
+>(({ data = [], placeholder, isFirstItem }, ref: RefDropDownType) => {
   const formattedData = useMemo(() => {
-    return data.map((item) => {
+    return data.map((item: any) => {
       return { label: item.name, value: item._id };
     });
   }, [data]);
@@ -30,6 +33,14 @@ export const DropDownWithSearch: FC<DropDownWithSearchProps> = ({
         : null
     );
   }, [formattedData]);
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      getData: () => value,
+    }),
+    [value]
+  );
 
   return (
     <Dropdown
@@ -45,28 +56,9 @@ export const DropDownWithSearch: FC<DropDownWithSearchProps> = ({
       placeholder={placeholder}
       searchPlaceholder="Търси..."
       value={value}
-      onChange={(item) => {
+      onChange={(item: any) => {
         setValue(item.value);
       }}
     />
   );
-};
-
-const styles = StyleSheet.create({
-  dropdown: {
-    margin: 16,
-    height: 50,
-    borderBottomColor: "gray",
-    borderBottomWidth: 0.5,
-  },
-  placeholderStyle: {
-    fontSize: 16,
-  },
-  selectedTextStyle: {
-    fontSize: 16,
-  },
-  inputSearchStyle: {
-    height: 40,
-    fontSize: 16,
-  },
 });

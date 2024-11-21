@@ -1,17 +1,20 @@
-import { View, Text } from "react-native";
-import React, { useContext, useState } from "react";
+import { View } from "react-native";
+import React, { FC, useContext, useRef } from "react";
 import DropDownWithSearch from "@/components/Atoms/DropDownWithSearch";
 import Button from "@/components/Atoms/Button";
 import { ColorThemes } from "@/components/Atoms/Button/types";
 import { router } from "expo-router";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { AppContext } from "@/hooks/context/useAppProvider/useAppProvider";
 import { getCategory } from "@/API/category";
 import { getAccountBalance } from "@/API/account/account";
+import { CategoryWithAccountInputsProps } from "./types";
 
-export const CategoryWithAccountInputs = () => {
+export const CategoryWithAccountInputs: FC<CategoryWithAccountInputsProps> = ({
+  accountRef,
+  categoryRef,
+}) => {
   const { user } = useContext(AppContext);
-  const queryClient = useQueryClient();
 
   const category = useQuery({
     queryKey: ["category"],
@@ -34,6 +37,7 @@ export const CategoryWithAccountInputs = () => {
             data={account.data}
             placeholder="Сметка"
             isFirstItem
+            ref={accountRef}
           />
         </View>
         <View className="w-10">
@@ -47,6 +51,7 @@ export const CategoryWithAccountInputs = () => {
             data={category.data}
             placeholder="Категория"
             isFirstItem
+            ref={categoryRef}
           />
         </View>
         <View className="w-10">

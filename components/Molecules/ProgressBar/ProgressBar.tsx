@@ -1,6 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 import * as Progress from "react-native-progress";
+import { ProgressBarProps } from "./types";
 
-export const ProgressBar = () => {
-  return <Progress.Bar progress={0.4} width={300} />;
+export const ProgressBar: FC<ProgressBarProps> = ({
+  progress = 0,
+  width = 300,
+}) => {
+  return <Progress.Bar progress={progress} width={width} />;
 };

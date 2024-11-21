@@ -17,3 +17,13 @@ export type TransferDataType = {
 };
 
 export type TransferType = (data: TransferDataType) => Promise<any>;
+
+type TotalBudgetType = {
+  difference: number;
+  totalIncome: number;
+  totalExpense: number;
+  moneyLeftPerDay: number;
+  differenceInPercentage: number;
+};
+
+export type GetTotalBudgetType = (userId: string) => Promise<TotalBudgetType>;

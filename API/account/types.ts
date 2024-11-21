@@ -6,6 +6,7 @@ export type GetAccountBalanceDataType = {
   _id: string;
   createdAt: Date;
 };
+
 export type GetAccountBalanceType = (
   userId: string
 ) => Promise<GetAccountBalanceDataType[]>;

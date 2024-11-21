@@ -1,3 +1,5 @@
+import { FinancePopulatedType } from "../../db/models/Finance/types";
+
 type MessageType = {
   message: string;
 };
@@ -15,3 +17,12 @@ export type FinanceGetAll = {
   moneyLeftPerDay: number;
   differenceInPercentage: number;
 };
+
+export type WeeksType = {
+  week1: FinancePopulatedType[];
+  week2: FinancePopulatedType[];
+  week3: FinancePopulatedType[];
+  week4: FinancePopulatedType[];
+};
+
+export type FinancesGetMonthlyTransactionsResponse = WeeksType;

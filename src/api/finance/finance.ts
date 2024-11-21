@@ -1,10 +1,21 @@
 import express from "express";
-import { FinanceGetAll, FinanceResponseCreate } from "./types";
+import {
+  FinanceGetAll,
+  FinanceResponseCreate,
+  FinancesGetMonthlyTransactionsResponse,
+  WeeksType,
+} from "./types";
 import Finance from "../../db/models/Finance";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { ObjectId } from "mongodb";
 import AccountBalance from "../../db/models/AccountBalance";
-import { FinanceTypeEnum } from "../../db/models/Finance/types";
+import {
+  FinancePopulatedType,
+  FinanceTypeEnum,
+  GetRecentTransactionsResponse,
+} from "../../db/models/Finance/types";
+import { CategorySchemaType } from "../../db/models/Category/types";
+import { AccountBalanceSchemaType } from "../../db/models/AccountBalance/types";
 
 const router = express.Router();
 
@@ -154,5 +165,81 @@ router.post<{}, FinanceGetAll>("/totalBudget", async (req, res) => {
     console.log("Error:", e);
   }
 });
+
+router.get<{}, GetRecentTransactionsResponse>(
+  "/recent/:userId",
+  async (req, res) => {
+    //@ts-ignore
+    const { userId } = req.params;
+
+    const finances = await Finance.find({
+      userId,
+    })
+      .populate<CategorySchemaType>("category")
+      .populate<AccountBalanceSchemaType>("accountBalance")
+      .limit(10);
+
+    res.json(finances as unknown as FinancePopulatedType[]);
+  }
+);
+
+router.get<{}, FinancesGetMonthlyTransactionsResponse>(
+  "/monthlyTransactions/:userId/:month/:category",
+  async (req, res) => {
+    //@ts-ignore
+    const { userId, month, category } = req.params;
+
+    const monthToNumber = parseInt(month) + 1;
+
+    const finances = await Finance.find({
+      userId,
+      createdAt: {
+        $gte: new Date(new Date().getFullYear(), monthToNumber - 1, 1),
+        $lt: new Date(new Date().getFullYear(), monthToNumber, 1),
+      },
+    })
+      .populate<CategorySchemaType>("category")
+      .populate<AccountBalanceSchemaType>("accountBalance");
+
+    const weeks: WeeksType = {
+      week1: [],
+      week2: [],
+      week3: [],
+      week4: [],
+    };
+
+    const pushToWeeks = (finance: FinancePopulatedType, week: string) => {
+      if (
+        category.toLowerCase() === "виж всички" ||
+        finance.category.name === category
+      )
+        weeks[week].push(finance);
+    };
+
+    finances.forEach((finance) => {
+      const day = finance.createdAt.getDate();
+      switch (true) {
+        case day <= 7:
+          // @ts-ignore
+          pushToWeeks(finance, "week1");
+          break;
+        case day <= 14:
+          // @ts-ignore
+          pushToWeeks(finance, "week2");
+          break;
+        case day <= 21:
+          // @ts-ignore
+          pushToWeeks(finance, "week3");
+          break;
+        default:
+          // @ts-ignore
+          pushToWeeks(finance, "week4");
+          break;
+      }
+    });
+
+    res.json(weeks);
+  }
+);
 
 export { router };

@@ -11,7 +11,8 @@
     "lint": "eslint --fix src test",
     "test": "jest",
     "typecheck": "tsc --noEmit",
-    "localip": "ipconfig getifaddr en0"
+    "localip": "ipconfig getifaddr en0",
+    "vercel-build": "echo hello"
   },
   "keywords": [],
   "author": "CJ R. <cj@null.computer> (https://w3cj.now.sh)",

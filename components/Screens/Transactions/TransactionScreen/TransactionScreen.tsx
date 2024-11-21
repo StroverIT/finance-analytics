@@ -4,10 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 import { getMonthlyExpensesPerWeek } from "@/API/finance";
 import { AppContext } from "@/hooks/context/useAppProvider/useAppProvider";
 import { TransactionContext } from "@/hooks/context/useTransactionProvider";
-import { RecentTransactionType } from "@/API/finance/types";
+import { FinancePopulatedType } from "@/API/finance/types";
 import RecentTransaction from "@/components/Molecules/RecentTransaction";
 import TopSide from "../TopSide";
 import { getWeekTitle } from "@/utils/datesTransofrm";
+import { TransformedMonthlyTransactions } from "./types";
 
 const TransactionScreen = () => {
   const { user } = useContext(AppContext);
@@ -21,21 +22,27 @@ const TransactionScreen = () => {
       category: selectedCategory,
     }),
   });
-  ///
-  const renderRecentTransactions = ({ item }: RecentTransactionType) => (
-    <RecentTransaction item={item} className="bg-white" />
-  );
+
+  const renderRecentTransactions = ({
+    item,
+  }: {
+    item: FinancePopulatedType;
+  }) => <RecentTransaction item={item} className="bg-white" />;
 
   const transformedMonthlyTransactions = useMemo(() => {
+    // @ts-ignore
     const objectToArray = Object.entries(monthlyTransactions.data);
-    const transformedArray = objectToArray
-      .map(([key, value], index) => ({
-        _id: key,
-        title: getWeekTitle(index, parseInt(selectedMonth)),
-        data: value,
-      }))
-      .filter((item) => item.data.length > 0);
-    return transformedArray;
+    // @ts-ignore
+    const transformedArray = objectToArray.map(([key, value], index) => ({
+      _id: key,
+      title: getWeekTitle(index, parseInt(selectedMonth)),
+      data: value,
+    })) as TransformedMonthlyTransactions[];
+
+    const filteredArray = transformedArray.filter(
+      (item) => item.data?.length > 0
+    );
+    return filteredArray;
   }, [monthlyTransactions.data]);
 
   return (
@@ -44,7 +51,7 @@ const TransactionScreen = () => {
         ListHeaderComponent={<TopSide />}
         className="pb-10"
         sections={transformedMonthlyTransactions}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item._id}
         // This must round bottom border if is last item in the list
         renderItem={renderRecentTransactions}
         renderSectionHeader={({ section: { title } }) => (

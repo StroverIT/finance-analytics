@@ -1,14 +1,6 @@
-export type RecentTransactionItemType = {
-  id: string;
-  icon: string;
-  category: string;
-  date: string;
-  amount: string;
-  typeFrom: string;
-  type: string;
-};
+import { FinancePopulatedType } from "@/API/finance/types";
 
 export type RecentTransactionType = {
-  item: RecentTransactionItemType;
+  item: FinancePopulatedType;
   className?: string;
 };

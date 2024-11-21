@@ -5,71 +5,16 @@ import { RecentTransaction } from "@/components/Molecules/RecentTransaction/Rece
 import TopSide from "@/components/Screens/HomeScreen/Topside";
 import { RecentTransactionType } from "@/components/Molecules/RecentTransaction/types";
 import { AppContext } from "@/hooks/context/useAppProvider/useAppProvider";
-
-const data = [
-  {
-    id: "1",
-    icon: "icon",
-    category: "Храна",
-    date: "01.11.2024",
-    amount: "50.00",
-    typeFrom: "cash",
-    type: "expense",
-  },
-  {
-    id: "2",
-
-    icon: "icon",
-    category: "Пътувания",
-    date: "01.11.2024",
-    amount: "50.00",
-    typeFrom: "cash",
-    type: "expense",
-  },
-  {
-    id: "3",
-
-    icon: "icon",
-    category: "Там нещо",
-    date: "01.11.2024",
-    amount: "50.00",
-    typeFrom: "cash",
-    type: "expense",
-  },
-  {
-    id: "4",
-
-    icon: "icon",
-    category: "Храна",
-    date: "01.11.2024",
-    amount: "50.00",
-    typeFrom: "cash",
-    type: "expense",
-  },
-  {
-    id: "5",
-
-    icon: "icon",
-    category: "Храна",
-    date: "01.11.2024",
-    amount: "50.00",
-    typeFrom: "cash",
-    type: "expense",
-  },
-  {
-    id: "6",
-
-    icon: "icon",
-    category: "Храна",
-    date: "01.11.2024",
-    amount: "50.00",
-    typeFrom: "cash",
-    type: "expense",
-  },
-];
+import { useQuery } from "@tanstack/react-query";
+import { recentTransaction } from "@/API/finance";
 
 const Index = () => {
   const { user } = useContext(AppContext);
+
+  const recentTransactions = useQuery({
+    queryKey: ["recentTransactions"],
+    queryFn: recentTransaction.bind(null, user?.uid as string),
+  });
 
   const renderRecentTransactions = ({ item }: RecentTransactionType) => (
     <RecentTransaction item={item} />
@@ -79,11 +24,12 @@ const Index = () => {
     <SafeAreaView>
       <FlatList
         ListHeaderComponent={<TopSide />}
-        data={data}
+        data={recentTransactions.data}
         renderItem={renderRecentTransactions}
         scrollEnabled={true}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
+        keyExtractor={(item) => item._id}
       />
     </SafeAreaView>
   );

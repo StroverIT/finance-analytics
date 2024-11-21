@@ -1,8 +1,8 @@
-import { GetAccountBalanceDataType } from "@/API/account/types";
+import { AccountBalanceSchemaType } from "@/API/account/types";
 import { ForwardedRef } from "react";
 
 export type DropDownWithSearchProps = {
-  data?: GetAccountBalanceDataType[];
+  data?: AccountBalanceSchemaType[];
   placeholder: string;
   isFirstItem?: boolean;
 };

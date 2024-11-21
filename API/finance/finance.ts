@@ -1,4 +1,9 @@
-import { CreateFinanceType, GetTotalBudgetType, TransferType } from "./types";
+import {
+  CreateFinanceType,
+  GetTotalBudgetType,
+  RecentTransactionType,
+  TransferType,
+} from "./types";
 
 const { EXPO_PUBLIC_SERVER_IP } = process.env;
 
@@ -38,6 +43,14 @@ export const getTotalBudget: GetTotalBudgetType = async (userId) => {
     `${EXPO_PUBLIC_SERVER_IP}/finance/totalBudget`,
     options
   );
+  const response = await res.json();
+  return response;
+};
+
+export const recentTransaction: RecentTransactionType = async (
+  userId: string
+) => {
+  const res = await fetch(`${EXPO_PUBLIC_SERVER_IP}/finance/recent/${userId}`);
   const response = await res.json();
   return response;
 };

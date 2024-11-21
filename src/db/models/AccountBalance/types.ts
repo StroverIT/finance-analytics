@@ -7,5 +7,5 @@ export type AccountBalanceSchemaType = {
   userId: string;
 
   _id: ObjectId;
-  createdAt: string;
+  createdAt: Date;
 };

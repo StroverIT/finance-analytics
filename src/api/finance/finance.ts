@@ -4,6 +4,7 @@ import Finance from "../../db/models/Finance";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { ObjectId } from "mongodb";
 import AccountBalance from "../../db/models/AccountBalance";
+import { FinanceTypeEnum } from "../../db/models/Finance/types";
 
 const router = express.Router();
 
@@ -94,11 +95,60 @@ router.post<{}, FinanceResponseCreate>("/transfer", async (req, res) => {
   }
 });
 
-router.get<{}, FinanceGetAll>("/", async (req, res) => {
+router.post<{}, FinanceGetAll>("/totalBudget", async (req, res) => {
   try {
-    const { user } = req.body;
+    // Here must return sum of all expenses and income
+    // For example:
+    // From 11.11.2024 -> 10.12.2024
+    // Let's says it's 21.11.24 we go with above dates
+    // If it's 10.12.2024 what we do? We get from 10.11.2024 -> 10.12.2024
+    // If it's 11.12.2024 we get from 10.12.2024 -> 10.01.2025
+
+    const { userId } = req.body;
+
+    const currentDate = new Date();
+    const currentDay = currentDate.getDate();
+    const currentMonth = currentDate.getMonth();
+
+    let startDate,
+      endDate,
+      totalIncome = 0,
+      totalExpense = 0;
+
+    if (currentDay >= 11) {
+      startDate = new Date(currentDate.getFullYear(), currentMonth, 11);
+      endDate = new Date(currentDate.getFullYear(), currentMonth + 1, 10);
+    } else {
+      startDate = new Date(currentDate.getFullYear(), currentMonth - 1, 11);
+      endDate = new Date(currentDate.getFullYear(), currentMonth, 10);
+    }
+
+    const finances = await Finance.find({
+      userId,
+      createdAt: {
+        $gte: startDate,
+        $lt: endDate,
+      },
+    });
+
+    finances.forEach((finance) => {
+      if (finance.type === FinanceTypeEnum.INCOME)
+        return (totalIncome += finance.price);
+
+      if (finance.type === FinanceTypeEnum.EXPENSE)
+        return (totalExpense += finance.price);
+    });
+
+    const difference = totalIncome - totalExpense;
+    const moneyLeftPerDay = difference / 30;
+    const differenceInPercentage = totalExpense / totalIncome;
+
     res.json({
-      messsage: "Vliza 2",
+      totalIncome,
+      totalExpense,
+      difference,
+      moneyLeftPerDay,
+      differenceInPercentage,
     });
   } catch (e) {
     console.log("Error:", e);

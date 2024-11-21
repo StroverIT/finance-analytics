@@ -1,5 +1,5 @@
 import express from "express";
-import AccountBalance from "../db/models/AccountBalance";
+import AccountBalance from "../../db/models/AccountBalance";
 
 const router = express.Router();
 
@@ -38,4 +38,4 @@ router.post<{}, AccountBalanceResponse>("/create", async (req, res) => {
   }
 });
 
-export default router;
+export { router };

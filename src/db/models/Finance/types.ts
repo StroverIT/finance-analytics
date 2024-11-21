@@ -6,7 +6,7 @@ export enum FinanceTypeEnum {
 }
 
 export type ArticleType = {
-  price: string;
+  price: number;
   article: string;
 };
 
@@ -20,5 +20,5 @@ export interface FinanceSchemaType extends ArticleType {
 
   type: FinanceTypeEnum;
 
-  createdAt: string;
+  createdAt: Date;
 }

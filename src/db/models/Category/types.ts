@@ -5,5 +5,5 @@ export type CategorySchemaType = {
   icon: string;
   userId: string;
   _id: ObjectId;
-  createdAt: string;
+  createdAt: Date;
 };

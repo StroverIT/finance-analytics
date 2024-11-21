@@ -22,9 +22,9 @@ const FinanceScheme = new Schema<FinanceSchemaType>({
     enum: [FinanceTypeEnum.INCOME, FinanceTypeEnum.EXPENSE],
   },
   createdAt: {
-    type: String,
+    type: Date,
     default: () => {
-      return new Date(Date.now()).toLocaleDateString();
+      return new Date(Date.now());
     },
   },
 });

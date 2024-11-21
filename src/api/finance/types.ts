@@ -8,4 +8,10 @@ type ErrorType = {
 
 export type FinanceResponseCreate = MessageType | ErrorType;
 
-export type FinanceGetAll = any;
+export type FinanceGetAll = {
+  difference: number;
+  totalIncome: number;
+  totalExpense: number;
+  moneyLeftPerDay: number;
+  differenceInPercentage: number;
+};

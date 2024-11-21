@@ -11,9 +11,9 @@ const AccountBalanceSchema = new Schema<AccountBalanceSchemaType>({
   },
 
   createdAt: {
-    type: String,
+    type: Date,
     default: () => {
-      return new Date(Date.now()).toLocaleDateString();
+      return new Date(Date.now());
     },
   },
 });

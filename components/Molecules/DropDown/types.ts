@@ -1,11 +1,4 @@
-import { ForwardedRef } from "react";
-
-export type DropDownProps = {};
-
-export type DropDownRef = {};
-
-export type DropDownWithSearchRefType = {
-  getData: () => string;
+export type DropDownProps = {
+  onChange: (value: string) => void;
+  value: string;
 };
-
-export type RefDropDownType = ForwardedRef<DropDownWithSearchRefType>;

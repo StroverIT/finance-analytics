@@ -1,52 +1,89 @@
 import { View, Text } from "react-native";
-import React, { FC } from "react";
+import React, { FC, useContext, useMemo } from "react";
 import { ChartProps } from "./types";
 import { BarChart } from "react-native-gifted-charts";
+import { useQuery } from "@tanstack/react-query";
+import { getWeekByWeekMonthlyExpenses } from "@/API/expense";
+import { AppContext } from "@/hooks/context/useAppProvider/useAppProvider";
 
-const data = [
-  {
-    value: 100,
+const date = new Date(new Date());
+const year = date.getFullYear().toString();
 
-    labelComponent: () => (
-      <View className="">
-        <Text className="text-[#514BF3] text-center font-semibold">100</Text>
-        <Text className="text-[#514BF3] text-center font-semibold">Сед 1</Text>
-      </View>
-    ),
-  },
-  {
-    value: 300,
-    labelComponent: () => (
-      <View className="">
-        <Text className="text-[#514BF3] text-center font-semibold">300</Text>
-        <Text className="text-[#514BF3] text-center font-semibold">Сед 2</Text>
-      </View>
-    ),
-  },
-  {
-    value: 1000,
-    labelComponent: () => (
-      <View className="">
-        <Text className="text-[#514BF3] text-center font-semibold">1000</Text>
-        <Text className="text-[#514BF3] text-center font-semibold">Сед 3</Text>
-      </View>
-    ),
-  },
-  {
-    value: 1500,
-    labelComponent: () => (
-      <View className="">
-        <Text className="text-[#514BF3] text-center font-semibold">1500</Text>
-        <Text className="text-[#514BF3] text-center font-semibold">Сед 4</Text>
-      </View>
-    ),
-  },
-];
+export const Chart: FC<ChartProps> = ({ selectedMonth }) => {
+  const { user } = useContext(AppContext);
+  const monthlyExpenses = useQuery({
+    queryKey: ["monthlyExpenses"],
+    queryFn: getWeekByWeekMonthlyExpenses.bind(null, {
+      userId: user?.uid as string,
+      year,
+      month: selectedMonth,
+    }),
+  });
 
-export const Chart: FC<ChartProps> = () => {
+  const { week1, week2, week3, week4 } = monthlyExpenses.data || {};
+
+  const memoizedData = useMemo(() => {
+    return [
+      {
+        value: week1,
+
+        labelComponent: () => (
+          <View className="">
+            <Text className="text-[#514BF3] text-center font-semibold">
+              {week1}
+            </Text>
+            <Text className="text-[#514BF3] text-center font-semibold">
+              Сед 1
+            </Text>
+          </View>
+        ),
+      },
+      {
+        value: week2,
+        labelComponent: () => (
+          <View className="">
+            <Text className="text-[#514BF3] text-center font-semibold">
+              {week2}
+            </Text>
+            <Text className="text-[#514BF3] text-center font-semibold">
+              Сед 2
+            </Text>
+          </View>
+        ),
+      },
+      {
+        value: week3,
+        labelComponent: () => (
+          <View className="">
+            <Text className="text-[#514BF3] text-center font-semibold">
+              {week3}
+            </Text>
+            <Text className="text-[#514BF3] text-center font-semibold">
+              Сед 3
+            </Text>
+          </View>
+        ),
+      },
+      {
+        value: week4,
+        labelComponent: () => (
+          <View className="">
+            <Text className="text-[#514BF3] text-center font-semibold">
+              {week4}
+            </Text>
+            <Text className="text-[#514BF3] text-center font-semibold">
+              Сед 4
+            </Text>
+          </View>
+        ),
+      },
+    ];
+  }, [monthlyExpenses.data]);
+
   return (
     <BarChart
-      data={data}
+      // @ts-ignore
+      data={memoizedData}
       color={"white"}
       frontColor="#84A5FF"
       barBorderRadius={10}

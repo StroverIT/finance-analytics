@@ -13,7 +13,6 @@ import {
 } from "./types";
 import { styles } from "./styles";
 
-// TODO: try without forwardRef
 export const DropDownWithSearch = forwardRef<
   DropDownWithSearchRefType,
   DropDownWithSearchProps

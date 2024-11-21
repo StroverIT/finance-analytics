@@ -15,7 +15,8 @@ export const ShowAllAccounts = () => {
   return (
     <View className="flex-row gap-4 flex-wrap justify-around">
       {account.data?.map((acc) => (
-        <View className="bg-white flex-row items-center">
+        // @ts-ignore
+        <View className="bg-white flex-row items-center" key={acc._id}>
           <Image
             source={{ uri: acc.icon }}
             className="w-10 h-10 mr-2"

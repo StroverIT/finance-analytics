@@ -1,1 +1,3 @@
-export type ChartProps = {};
+export type ChartProps = {
+  selectedMonth: string;
+};

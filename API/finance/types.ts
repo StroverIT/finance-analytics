@@ -62,3 +62,22 @@ export type FinancePopulatedType = Omit<
 export type RecentTransactionType = (
   userId: string
 ) => Promise<FinancePopulatedType[]>;
+
+export type MonthlyExpensesPerWeekParams = {
+  userId: string;
+  month: string;
+  category: string;
+};
+
+export type MonthlyExpensesPerWeekDataType = {
+  week1: FinancePopulatedType;
+  week2: FinancePopulatedType;
+  week3: FinancePopulatedType;
+  week4: FinancePopulatedType;
+};
+
+export type MonthlyExpensesPerWeekType = ({
+  userId,
+  month,
+  category,
+}: MonthlyExpensesPerWeekParams) => Promise<MonthlyExpensesPerWeekDataType>;

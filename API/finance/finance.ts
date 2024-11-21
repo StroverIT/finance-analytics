@@ -1,6 +1,7 @@
 import {
   CreateFinanceType,
   GetTotalBudgetType,
+  MonthlyExpensesPerWeekType,
   RecentTransactionType,
   TransferType,
 } from "./types";
@@ -51,6 +52,18 @@ export const recentTransaction: RecentTransactionType = async (
   userId: string
 ) => {
   const res = await fetch(`${EXPO_PUBLIC_SERVER_IP}/finance/recent/${userId}`);
+  const response = await res.json();
+  return response;
+};
+
+export const getMonthlyExpensesPerWeek: MonthlyExpensesPerWeekType = async ({
+  userId,
+  month,
+  category,
+}) => {
+  const res = await fetch(
+    `${EXPO_PUBLIC_SERVER_IP}/finance//monthlyTransactions/${userId}/${month}/${category}`
+  );
   const response = await res.json();
   return response;
 };

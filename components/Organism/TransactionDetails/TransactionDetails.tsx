@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCategory } from "@/API/category";
 import { AppContext } from "@/hooks/context/useAppProvider/useAppProvider";
 import { CategorySchemaType } from "@/API/category/types";
+import { TransactionContext } from "@/hooks/context/useTransactionProvider";
 
 const data = [
   {
@@ -42,29 +43,30 @@ const data = [
 ];
 
 export const TransactionDetails = () => {
-  const [selectedCategory, setSelectedCategory] = useState("Виж всички");
+  const {
+    selectedCategory,
+    setSelectedCategory,
+    onChangeDropDown,
+    selectedMonth,
+  } = useContext(TransactionContext);
+
   const { user } = useContext(AppContext);
-  const { onChangeDropDown, selectedMonth } = useMonthlyDropDown({
-    queryKey: "monthlyExpensesPerWeek",
-  });
 
   const category = useQuery({
     queryKey: ["category"],
     queryFn: getCategory.bind(null, user?.uid as string),
   });
+  const categoryCond = category?.data ? category.data : [];
 
-  const categoryData = useMemo(() => {
-    return [
-      {
-        name: "Виж всички",
-        userId: "1",
-        isViewAll: true,
-        _id: "0",
-      },
-      // @ts-ignore
-      ...category.data,
-    ];
-  }, [category.data]);
+  const categoryData = [
+    {
+      name: "Виж всички",
+      userId: "1",
+      isViewAll: true,
+      _id: "see all",
+    },
+    ...categoryCond,
+  ];
 
   return (
     <>
@@ -76,6 +78,7 @@ export const TransactionDetails = () => {
       </View>
       <FlatList
         className="mt-6 sticky top-0"
+        // @ts-ignore
         data={categoryData}
         renderItem={({ item }: { item: CategorySchemaType }) => {
           const isSelected = item.name === selectedCategory;

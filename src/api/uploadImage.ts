@@ -3,13 +3,18 @@ import { v2 as cloudinary } from "cloudinary";
 
 import multer from "multer";
 
+require("dotenv").config();
+
 const upload = multer({ storage: multer.memoryStorage() });
+
+const { CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET } =
+  process.env;
 
 // Configuration
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+  cloud_name: CLOUDINARY_CLOUD_NAME,
+  api_key: CLOUDINARY_API_KEY,
+  api_secret: CLOUDINARY_API_SECRET,
 });
 
 const router = express.Router();
@@ -52,6 +57,11 @@ router.post<{}, Response>("/", upload.single("image"), async (req, res) => {
     });
   } catch (e) {
     console.log("test+++ error", e);
+    console.log("keys: ", {
+      CLOUDINARY_CLOUD_NAME,
+      CLOUDINARY_API_KEY,
+      CLOUDINARY_API_SECRET,
+    });
   }
 });
 

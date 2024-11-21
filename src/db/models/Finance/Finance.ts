@@ -7,7 +7,9 @@ const FinanceScheme = new Schema<FinanceSchemaType>({
   price: Number,
   article: String,
 
-  account: {
+  billImage: String,
+
+  accountBalance: {
     type: Schema.Types.ObjectId,
     ref: "AccountBalance",
   },
@@ -15,8 +17,10 @@ const FinanceScheme = new Schema<FinanceSchemaType>({
     type: Schema.Types.ObjectId,
     ref: "Category",
   },
-
-  type: FinanceTypeEnum,
+  type: {
+    type: String,
+    enum: [FinanceTypeEnum.INCOME, FinanceTypeEnum.EXPENSE],
+  },
   createdAt: {
     type: String,
     default: () => {

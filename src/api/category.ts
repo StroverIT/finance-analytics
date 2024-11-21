@@ -23,7 +23,6 @@ router.get<{}, GetCategoryResponse>("/getAll/:userId", async (req, res) => {
   const data = await Category.find({
     userId,
   });
-  console.log("test+++", data);
 
   res.json(data);
 });

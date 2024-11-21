@@ -5,15 +5,20 @@ export enum FinanceTypeEnum {
   EXPENSE = "expense",
 }
 
-export type FinanceSchemaType = {
+export type ArticleType = {
+  price: string;
+  article: string;
+};
+
+export interface FinanceSchemaType extends ArticleType {
   userId: string;
 
-  price: number;
+  billImage?: string;
   article: string;
-  account: ObjectId;
+  accountBalance: ObjectId;
   category: ObjectId;
 
   type: FinanceTypeEnum;
 
   createdAt: string;
-};
+}

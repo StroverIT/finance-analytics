@@ -11,6 +11,7 @@ import { initializeFireBaseApp } from "./libs/firebaseConfig";
 // import MessageResponse from "./interfaces/MessageResponse";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import mongoose from "mongoose";
+import { MessageResponse } from "./types";
 
 require("dotenv").config();
 
@@ -23,11 +24,11 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-// app.get<{}, MessageResponse>("/", (req, res) => {
-//   res.json({
-//     message: "Home screen brat initial",
-//   });
-// });
+app.get<{}, MessageResponse>("/", (req, res) => {
+  res.json({
+    message: "Home screen brat initial",
+  });
+});
 
 app.use("/api/v1", api);
 

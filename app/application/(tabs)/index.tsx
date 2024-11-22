@@ -22,11 +22,11 @@ const Index = () => {
   );
 
   useEffect(() => {
-    console.log("test+++ vliza ?");
-    SharedPreferencesModule.setWidgetData(
-      "WidgetData",
-      "Updated data from React Native!"
-    );
+    if (recentTransactions.data)
+      SharedPreferencesModule.setWidgetData(
+        "widget_text",
+        JSON.stringify(recentTransactions.data)
+      );
   }, [recentTransactions.data]);
 
   return (

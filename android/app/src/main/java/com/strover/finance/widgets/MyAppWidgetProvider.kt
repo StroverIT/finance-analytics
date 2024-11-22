@@ -11,27 +11,17 @@ import android.widget.RemoteViews
 import com.strover.finance.R
 import android.content.ComponentName
 import android.util.Log;
+import org.json.JSONObject
 
 class MyAppWidgetProvider : AppWidgetProvider() {
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-        val sharedPreferences = context.getSharedPreferences("WidgetData", Context.MODE_PRIVATE)
-        val widgetText = sharedPreferences.getString("WidgetData", "Default Widget Text")
-        Log.d("Inter+++++ widgettext", "Could not access BuildConfig field " + widgetText );
+        updateWidget(context, appWidgetManager, appWidgetIds)
 
-        for (appWidgetId in appWidgetIds) {
-            val views = RemoteViews(context.packageName, R.layout.widget_layout)
-
-            // Update the widget text with saved data
-            views.setTextViewText(R.id.widgetTextView, widgetText)
-
-            appWidgetManager.updateAppWidget(appWidgetId, views)
-        }
     }
 
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)
-        Log.d("Inter+++++", "Could not access BuildConfig field " + intent );
 
         if (intent.action == "android.appwidget.action.APPWIDGET_UPDATE") {
             val appWidgetManager = AppWidgetManager.getInstance(context)
@@ -40,4 +30,36 @@ class MyAppWidgetProvider : AppWidgetProvider() {
             onUpdate(context, appWidgetManager, appWidgetIds)
         }
     }
+
+    private fun updateWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
+        // Get the updated data from SharedPreferences
+        val sharedPreferences = context.getSharedPreferences("WidgetData", Context.MODE_PRIVATE)
+        val jsonString = sharedPreferences.getString("widget_text", null)
+
+        var expense = 0
+        var income = 0
+
+        if (jsonString != null) {
+            try {
+                // Parse the JSON string to access properties
+                val jsonObject = JSONObject(jsonString)
+                expense = jsonObject.getInt("totalExpense")
+                income = jsonObject.getInt("totalIncome")
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        // Update each widget instance
+        for (appWidgetId in appWidgetIds) {
+            val views = RemoteViews(context.packageName, R.layout.widget_layout)
+
+            // Set the new data to the TextView in the widget layout
+            views.setTextViewText(R.id.widgetTextView, expense.toString())
+            views.setTextViewText(R.id.widgetTextView, "/ $income")
+
+            // Apply the changes to the widget
+            appWidgetManager.updateAppWidget(appWidgetId, views)
+        }
+    }
+
 }

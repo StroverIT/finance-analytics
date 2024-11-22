@@ -1,31 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="#FFFF"
-    >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/expenseIncomeTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Expense / Income" />
-
-        <TextView
-            android:id="@+id/leftTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Left: 0" />
-
-        <TextView
-            android:id="@+id/perDayTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="0 / perDay" />
-
-    </LinearLayout>
-</RelativeLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:background="#FFFF" android:orientation="vertical" android:layout_gravity="center">
+	<!-- Income and expense -->
+	<TextView android:id="@+id/expenseIncomeTextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Expense / Income" android:textSize="25sp" android:layout_gravity="center" />
+	<!-- Money left and Money per day -->
+	<TextView android:id="@+id/moneyLeftAndPerDay" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Left: 0" android:textSize="14sp" android:layout_gravity="center" />
+</LinearLayout>

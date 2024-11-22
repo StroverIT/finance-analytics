@@ -59,9 +59,9 @@ class MyAppWidgetProvider : AppWidgetProvider() {
             val views = RemoteViews(context.packageName, R.layout.widget_layout)
 
             // Set the new data to the TextView in the widget layout
-            views.setTextViewText(R.id.expenseIncomeTextView, "$expense / $income")
-            views.setTextViewText(R.id.leftTextView, String.format("%.2f", moneyLeftPerDay))
-            views.setTextViewText(R.id.perDayTextView, "$difference")
+            views.setTextViewText(R.id.expenseIncomeTextView, String.format("%.2f / %.2f", expense, income))
+            views.setTextViewText(R.id.moneyLeftAndPerDay, String.format("Оставащи: %.2f    %.2f / ден ", moneyLeftPerDay, difference))
+
             
             // Apply the changes to the widget
             appWidgetManager.updateAppWidget(appWidgetId, views)

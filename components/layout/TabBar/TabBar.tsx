@@ -3,7 +3,7 @@ import { useLinkBuilder, useTheme } from "@react-navigation/native";
 import { Text, PlatformPressable } from "@react-navigation/elements";
 import { icons } from "@/assets/images/applicationTabIcons/icons";
 import { RouteNameType, TabBarProps } from "./types";
-import { FC } from "react";
+import React, { FC } from "react";
 
 export const TabBar: FC<TabBarProps> = ({ state, descriptors, navigation }) => {
   const { colors } = useTheme();
@@ -43,7 +43,7 @@ export const TabBar: FC<TabBarProps> = ({ state, descriptors, navigation }) => {
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarButtonTestID}
             onPress={onPress}
-            pressColor="transparent"
+            pressColor="#ffff"
             onLongPress={onLongPress}
             className=""
           >

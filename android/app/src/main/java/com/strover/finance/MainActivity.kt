@@ -12,7 +12,7 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import com.strover.finance.MyAppWidgetProvider
+import com.strover.finance.widgets.MyAppWidgetProvider
 
 import expo.modules.ReactActivityDelegateWrapper
 

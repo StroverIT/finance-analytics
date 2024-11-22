@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import Edit from "@/assets/images/icons/edit.svg";
 import ProgressBar from "@/components/Molecules/ProgressBar";
@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AppContext } from "@/hooks/context/useAppProvider/useAppProvider";
 import { getTotalBudget } from "@/API/finance";
 import ShowAllAccounts from "@/components/Organism/ShowAllAccounts";
+import SharedPreferencesModule from "@/utils/nativeModules/SharedPreferencesModule";
 
 export const TotalBudged = () => {
   const { user } = useContext(AppContext);
@@ -15,6 +16,15 @@ export const TotalBudged = () => {
     queryKey: ["totalBudget"],
     queryFn: getTotalBudget.bind(null, user?.uid as string),
   });
+
+  useEffect(() => {
+    console.dir("test+++", totalBudget.data);
+    if (totalBudget.data)
+      SharedPreferencesModule.setWidgetData(
+        "widget_text",
+        JSON.stringify(totalBudget.data)
+      );
+  }, [totalBudget.data]);
 
   return (
     <View className="bg-white p-4">

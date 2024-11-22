@@ -1,5 +1,5 @@
 import { FlatList, SafeAreaView } from "react-native";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 
 import { RecentTransaction } from "@/components/Molecules/RecentTransaction/RecentTransaction";
 import TopSide from "@/components/Screens/HomeScreen/Topside";
@@ -7,7 +7,6 @@ import { RecentTransactionType } from "@/components/Molecules/RecentTransaction/
 import { AppContext } from "@/hooks/context/useAppProvider/useAppProvider";
 import { useQuery } from "@tanstack/react-query";
 import { recentTransaction } from "@/API/finance";
-import SharedPreferencesModule from "@/utils/nativeModules/SharedPreferencesModule";
 
 const Index = () => {
   const { user } = useContext(AppContext);
@@ -20,14 +19,6 @@ const Index = () => {
   const renderRecentTransactions = ({ item }: RecentTransactionType) => (
     <RecentTransaction item={item} />
   );
-
-  useEffect(() => {
-    if (recentTransactions.data)
-      SharedPreferencesModule.setWidgetData(
-        "widget_text",
-        JSON.stringify(recentTransactions.data)
-      );
-  }, [recentTransactions.data]);
 
   return (
     <SafeAreaView>

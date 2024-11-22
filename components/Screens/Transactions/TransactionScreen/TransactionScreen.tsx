@@ -30,6 +30,7 @@ const TransactionScreen = () => {
   }) => <RecentTransaction item={item} className="bg-white" />;
 
   const transformedMonthlyTransactions = useMemo(() => {
+    if (!monthlyTransactions.data) return [];
     // @ts-ignore
     const objectToArray = Object.entries(monthlyTransactions.data);
     // @ts-ignore

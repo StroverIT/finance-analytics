@@ -8,6 +8,11 @@ import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
 import com.facebook.react.defaults.DefaultReactActivityDelegate
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import com.strover.finance.MyAppWidgetProvider
 
 import expo.modules.ReactActivityDelegateWrapper
 
@@ -62,4 +67,29 @@ class MainActivity : ReactActivity() {
       // because it's doing more than [Activity.moveTaskToBack] in fact.
       super.invokeDefaultOnBackPressed()
   }
+
+  override fun onNewIntent(intent: Intent) {
+    super.onNewIntent(intent)
+    val data = intent.data
+
+    if (data != null && data.scheme == "myapp" && data.host == "updatewidget") {
+        val widgetData = data.getQueryParameter("data")
+        // Log.d("MainActivity", "Received deep link data: $widgetData")
+
+        // Save widget data to SharedPreferences
+        val sharedPreferences = getSharedPreferences("WidgetData", Context.MODE_PRIVATE)
+        with(sharedPreferences.edit()) {
+            putString("WidgetData", widgetData)
+            apply()
+        }
+
+        // Trigger the widget update
+        val appWidgetManager = AppWidgetManager.getInstance(this)
+        val widgetIds = appWidgetManager.getAppWidgetIds(ComponentName(this, MyAppWidgetProvider::class.java))
+        val provider = MyAppWidgetProvider()
+        provider.onUpdate(this, appWidgetManager, widgetIds)
+    }
+  }
+
+
 }

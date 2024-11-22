@@ -15,6 +15,7 @@ import com.facebook.soloader.SoLoader
 
 import expo.modules.ApplicationLifecycleDispatcher
 import expo.modules.ReactNativeHostWrapper
+import com.strover.finance.SharedPreferencesPackage
 
 class MainApplication : Application(), ReactApplication {
 
@@ -25,6 +26,7 @@ class MainApplication : Application(), ReactApplication {
             val packages = PackageList(this).packages
             // Packages that cannot be autolinked yet can be added manually here, for example:
             // packages.add(new MyReactNativePackage());
+            packages.add(SharedPreferencesPackage());
             return packages
           }
 

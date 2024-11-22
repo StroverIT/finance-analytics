@@ -7,6 +7,7 @@ import { RecentTransactionType } from "@/components/Molecules/RecentTransaction/
 import { AppContext } from "@/hooks/context/useAppProvider/useAppProvider";
 import { useQuery } from "@tanstack/react-query";
 import { recentTransaction } from "@/API/finance";
+import SharedPreferencesModule from "@/utils/nativeModules/SharedPreferencesModule";
 
 const Index = () => {
   const { user } = useContext(AppContext);
@@ -19,6 +20,14 @@ const Index = () => {
   const renderRecentTransactions = ({ item }: RecentTransactionType) => (
     <RecentTransaction item={item} />
   );
+
+  useEffect(() => {
+    console.log("test+++ vliza ?");
+    SharedPreferencesModule.setWidgetData(
+      "WidgetData",
+      "Updated data from React Native!"
+    );
+  }, [recentTransactions.data]);
 
   return (
     <SafeAreaView>

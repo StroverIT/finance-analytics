@@ -17,8 +17,11 @@ export const TotalBudged = () => {
     queryFn: getTotalBudget.bind(null, user?.uid as string),
   });
 
+  // Also this could be in the application layout and check for totalBudgett change
+  // Because if we are on different screen and change something related, it wont be displayed here
+
   useEffect(() => {
-    console.dir("test+++", totalBudget.data);
+    console.log("test+++", totalBudget.data);
     if (totalBudget.data)
       SharedPreferencesModule.setWidgetData(
         "widget_text",

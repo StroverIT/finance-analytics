@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/widgetTextView"
-        android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#FFFF"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello Widget 1"
-        android:textSize="16sp" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/expenseIncomeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Expense / Income" />
+
+        <TextView
+            android:id="@+id/leftTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Left: 0" />
+
+        <TextView
+            android:id="@+id/perDayTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0 / perDay" />
+
+    </LinearLayout>
 </RelativeLayout>

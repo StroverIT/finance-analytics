@@ -15,7 +15,7 @@ const TransactionScreen = () => {
   const { selectedMonth, selectedCategory } = useContext(TransactionContext);
 
   const monthlyTransactions = useQuery({
-    queryKey: ["recentTransactions"],
+    queryKey: ["monthlyTransactions"],
     queryFn: getMonthlyExpensesPerWeek.bind(null, {
       userId: user?.uid as string,
       month: selectedMonth,

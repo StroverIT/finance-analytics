@@ -10,7 +10,7 @@ export const MonthlyChart = () => {
     queryKey: "monthlyExpenses",
   });
   return (
-    <View className="px-4 py-10">
+    <View className="px-4 pb-10 pt-4">
       <View className="justify-between items-center flex-row">
         <Text className="text-xl font-semibold flex-1">Текущи разходи</Text>
         <DropDown onChange={onChangeDropDown} value={selectedMonth} />

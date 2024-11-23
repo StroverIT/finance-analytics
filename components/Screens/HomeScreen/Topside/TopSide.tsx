@@ -9,7 +9,9 @@ export const TopSide = () => {
       <TotalBudged />
       <MonthlyChart />
       {/* This is header for List of the recent transaction from HomeScreen FlatList */}
-      <Text className="text-xl font-semibold px-4">Скорошни транзакции</Text>
+      <Text className="text-xl font-semibold px-4 mt-4">
+        Скорошни транзакции
+      </Text>
     </>
   );
 };

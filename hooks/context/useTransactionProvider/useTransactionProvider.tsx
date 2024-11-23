@@ -34,7 +34,7 @@ export const TransactionProvider: React.FC<TransactionContextType> = ({
   });
 
   useEffect(() => {
-    queryClient.invalidateQueries({ queryKey: ["recentTransactions"] });
+    queryClient.invalidateQueries({ queryKey: ["monthlyTransactions"] });
   }, [selectedCategory, selectedMonth]);
 
   return (

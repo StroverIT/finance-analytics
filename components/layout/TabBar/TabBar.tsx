@@ -43,11 +43,11 @@ export const TabBar: FC<TabBarProps> = ({ state, descriptors, navigation }) => {
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarButtonTestID}
             onPress={onPress}
-            pressColor="#ffff"
+            pressColor="rgba(0, 0, 0, 0.00)"
             onLongPress={onLongPress}
-            className=""
+            className="px-5"
           >
-            <View className="items-center py-8 justify-center flex-1">
+            <View className="items-center py-8  justify-center flex-1">
               {icons[route.name as RouteNameType]({
                 width: 24,
                 height: 24,

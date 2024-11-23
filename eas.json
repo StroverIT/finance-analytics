@@ -27,9 +27,6 @@
         "EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID": "304528288925",
         "EXPO_PUBLIC_FIREBASE_APP_ID": "1:304528288925:web:97d6255a3976385c86b874",
         "EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID": "G-PKDCCYH7L7"
-      },
-      "android": {
-        "buildType": "apk"
       }
     }
   }

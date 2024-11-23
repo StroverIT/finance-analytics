@@ -6,10 +6,11 @@ import { useFonts, Raleway_700Bold } from "@expo-google-fonts/raleway";
 import LineWithText from "@/components/Atoms/LineWithText";
 import LogoWithName from "@/components/Molecules/LogoWithName";
 import LoginForm from "@/components/Molecules/LoginForm";
+import SocialMediaButtons from "@/components/Organism/SocialMediaButtons";
 
-const SocialMediaButtons = React.lazy(
-  () => import("@/components/Organism/SocialMediaButtons")
-);
+// const SocialMediaButtons = React.lazy(
+//   () => import("@/components/Organism/SocialMediaButtons")
+// );
 
 const Index = () => {
   let [fontsLoaded] = useFonts({

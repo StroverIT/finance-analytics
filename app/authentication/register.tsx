@@ -7,10 +7,11 @@ import LogoWithName from "@/components/Molecules/LogoWithName";
 import RegisterForm from "@/components/Molecules/RegisterForm";
 import { router } from "expo-router";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import SocialMediaButtons from "@/components/Organism/SocialMediaButtons";
 
-const SocialMediaButtons = React.lazy(
-  () => import("@/components/Organism/SocialMediaButtons")
-);
+// const SocialMediaButtons = React.lazy(
+//   () => import("@/components/Organism/SocialMediaButtons")
+// );
 
 const Register = () => {
   let [fontsLoaded] = useFonts({

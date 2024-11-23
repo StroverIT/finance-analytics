@@ -60,7 +60,7 @@ class MyAppWidgetProvider : AppWidgetProvider() {
 
             // Set the new data to the TextView in the widget layout
             views.setTextViewText(R.id.expenseIncomeTextView, String.format("%.2f / %.2f", expense, income))
-            views.setTextViewText(R.id.moneyLeftAndPerDay, String.format("Оставащи: %.2f    %.2f / ден ", moneyLeftPerDay, difference))
+            views.setTextViewText(R.id.moneyLeftAndPerDay, String.format("Оставащи: %.2f    %.2f / ден ", difference, moneyLeftPerDay))
 
             
             // Apply the changes to the widget

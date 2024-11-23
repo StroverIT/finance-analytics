@@ -46,8 +46,6 @@ router.post<{}, Response>("/", upload.single("image"), async (req, res) => {
 
     const result = await cloudinary.uploader.upload(fileUri, {
       invalidate: true,
-      width: 400,
-      height: 400,
       crop: "fill",
     });
 

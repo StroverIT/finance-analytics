@@ -1,12 +1,11 @@
-import { View, Platform } from "react-native";
-import { useLinkBuilder, useTheme } from "@react-navigation/native";
-import { Text, PlatformPressable } from "@react-navigation/elements";
+import { View } from "react-native";
+import { useLinkBuilder } from "@react-navigation/native";
+import { PlatformPressable } from "@react-navigation/elements";
 import { icons } from "@/assets/images/applicationTabIcons/icons";
 import { RouteNameType, TabBarProps } from "./types";
 import React, { FC } from "react";
 
 export const TabBar: FC<TabBarProps> = ({ state, descriptors, navigation }) => {
-  const { colors } = useTheme();
   const { buildHref } = useLinkBuilder();
 
   return (

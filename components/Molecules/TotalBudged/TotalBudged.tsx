@@ -21,7 +21,6 @@ export const TotalBudged = () => {
   // Because if we are on different screen and change something related, it wont be displayed here
 
   useEffect(() => {
-    console.log("test+++", totalBudget.data);
     if (totalBudget.data)
       SharedPreferencesModule.setWidgetData(
         "widget_text",

@@ -1,12 +1,17 @@
 {
   "expo": {
-    "name": "frontend",
-    "slug": "frontend",
+    "name": "WalletWay",
+    "slug": "ww",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/logo.png",
+    "icon": "./assets/images/icon-v2.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/icon-v2.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
@@ -15,8 +20,9 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/splashscreen.png",
-        "backgroundColor": "#ffff"
+        "foregroundImage": "./assets/images/icon-v2.png",
+        "resizeMode": "cover",
+        "backgroundColor": "#ffffff"
       },
       "package": "com.strover.finance",
       "googleServicesFile": "./google-services.json"
@@ -29,15 +35,6 @@
     "plugins": [
       "expo-router",
       "@react-native-google-signin/google-signin",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/splashscreen.png",
-          "imageWidth": 200,
-          "resizeMode": "cover",
-          "backgroundColor": "#ffff"
-        }
-      ],
       [
         "expo-build-properties",
         {

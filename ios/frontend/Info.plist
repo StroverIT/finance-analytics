@@ -2,26 +2,223 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
-    <key>CADisableMinimumFrameDurationOnPhone</key>
+    <key>
+			CADisableMinimumFrameDurationOnPhone
+		</key>
     <true/>
-    <key>CFBundleDevelopmentRegion</key>
-    <string>$(DEVELOPMENT_LANGUAGE)</string>
+    <key>
+			CFBundleDevelopmentRegion
+		</key>
+    <string>
+			$(DEVELOPMENT_LANGUAGE)
+		</string>
+    <key>
+			CFBundleDisplayName
+		</key>
+    <string>
+			WalletWay
+		</string>
+    <key>
+			CFBundleExecutable
+		</key>
+    <string>
+			$(EXECUTABLE_NAME)
+		</string>
+    <key>
+			CFBundleIdentifier
+		</key>
+    <string>
+			$(PRODUCT_BUNDLE_IDENTIFIER)
+		</string>
+    <key>
+			CFBundleInfoDictionaryVersion
+		</key>
+    <string>
+			6.0
+		</string>
+    <key>
+			CFBundleName
+		</key>
+    <string>
+			$(PRODUCT_NAME)
+		</string>
+    <key>
+			CFBundlePackageType
+		</key>
+    <string>
+			$(PRODUCT_BUNDLE_PACKAGE_TYPE)
+		</string>
+    <key>
+			CFBundleShortVersionString
+		</key>
+    <string>
+			1.0.0
+		</string>
+    <key>
+			CFBundleSignature
+		</key>
+    <string>
+			????
+		</string>
+    <key>
+			CFBundleURLTypes
+		</key>
+    <array>
+      <dict>
+        <key>
+					CFBundleURLSchemes
+				</key>
+        <array>
+          <string>
+						myapp
+					</string>
+          <string>
+						com.strover.finance
+					</string>
+        </array>
+      </dict>
+      <dict>
+        <key>
+					CFBundleURLSchemes
+				</key>
+        <array>
+          <string>
+						com.googleusercontent.apps.304528288925-qded4pr8vl171d0ri4mbt4cnmr284v0e
+					</string>
+        </array>
+      </dict>
+      <dict>
+        <key>
+					CFBundleURLSchemes
+				</key>
+        <array>
+          <string>
+						exp+frontend
+					</string>
+        </array>
+      </dict>
+    </array>
+    <key>
+			CFBundleVersion
+		</key>
+    <string>
+			1
+		</string>
+    <key>
+			LSMinimumSystemVersion
+		</key>
+    <string>
+			12.0
+		</string>
+    <key>
+			LSRequiresIPhoneOS
+		</key>
+    <true/>
+    <key>
+			NSAppTransportSecurity
+		</key>
+    <dict>
+      <key>
+				NSAllowsArbitraryLoads
+			</key>
+      <false/>
+      <key>
+				NSAllowsLocalNetworking
+			</key>
+      <true/>
+    </dict>
+    <key>
+			NSCameraUsageDescription
+		</key>
+    <string>
+			Allow $(PRODUCT_NAME) to access your camera
+		</string>
+    <key>
+			NSMicrophoneUsageDescription
+		</key>
+    <string>
+			Allow $(PRODUCT_NAME) to access your microphone
+		</string>
+    <key>
+			NSPhotoLibraryUsageDescription
+		</key>
+    <string>
+			The app accesses your photos to let you share them with your friends.
+		</string>
+    <key>
+			NSUserActivityTypes
+		</key>
+    <array>
+      <string>
+				$(PRODUCT_BUNDLE_IDENTIFIER).expo.index_route
+			</string>
+    </array>
+    <key>
+			UILaunchStoryboardName
+		</key>
+    <string>
+			SplashScreen
+		</string>
+    <key>
+			UIRequiredDeviceCapabilities
+		</key>
+    <array>
+      <string>
+				arm64
+			</string>
+    </array>
+    <key>
+			UIRequiresFullScreen
+		</key>
+    <false/>
+    <key>
+			UIStatusBarStyle
+		</key>
+    <string>
+			UIStatusBarStyleDefault
+		</string>
+    <key>
+			UISupportedInterfaceOrientations
+		</key>
+    <array>
+      <string>
+				UIInterfaceOrientationPortrait
+			</string>
+      <string>
+				UIInterfaceOrientationPortraitUpsideDown
+			</string>
+    </array>
+    <key>
+			UISupportedInterfaceOrientations~ipad
+		</key>
+    <array>
+      <string>
+				UIInterfaceOrientationPortrait
+			</string>
+      <string>
+				UIInterfaceOrientationPortraitUpsideDown
+			</string>
+      <string>
+				UIInterfaceOrientationLandscapeLeft
+			</string>
+      <string>
+				UIInterfaceOrientationLandscapeRight
+			</string>
+    </array>
+    <key>
+			UIUserInterfaceStyle
+		</key>
+    <string>
+			Automatic
+		</string>
+    <key>
+			UIViewControllerBasedStatusBarAppearance
+		</key>
+    <false/>
     <key>CFBundleDisplayName</key>
-    <string>frontend</string>
-    <key>CFBundleExecutable</key>
-    <string>$(EXECUTABLE_NAME)</string>
-    <key>CFBundleIdentifier</key>
-    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-    <key>CFBundleInfoDictionaryVersion</key>
-    <string>6.0</string>
-    <key>CFBundleName</key>
-    <string>$(PRODUCT_NAME)</string>
-    <key>CFBundlePackageType</key>
-    <string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+    <string>WalletWay</string>
     <key>CFBundleShortVersionString</key>
     <string>1.0.0</string>
-    <key>CFBundleSignature</key>
-    <string>????</string>
     <key>CFBundleURLTypes</key>
     <array>
       <dict>
@@ -40,29 +237,12 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>exp+frontend</string>
-        </array>
-      </dict>
-       <dict>
-        <key>CFBundleURLSchemes</key>
-        <array>
-          <string>com.googleusercontent.apps.976590757431-eeon3frn6neugqkhtk2bt6vsom5706bd</string>
+          <string>exp+ww</string>
         </array>
       </dict>
     </array>
     <key>CFBundleVersion</key>
     <string>1</string>
-    <key>LSMinimumSystemVersion</key>
-    <string>12.0</string>
-    <key>LSRequiresIPhoneOS</key>
-    <true/>
-    <key>NSAppTransportSecurity</key>
-    <dict>
-      <key>NSAllowsArbitraryLoads</key>
-      <false/>
-      <key>NSAllowsLocalNetworking</key>
-      <true/>
-    </dict>
     <key>NSCameraUsageDescription</key>
     <string>Allow $(PRODUCT_NAME) to access your camera</string>
     <key>NSMicrophoneUsageDescription</key>
@@ -75,14 +255,8 @@
     </array>
     <key>UILaunchStoryboardName</key>
     <string>SplashScreen</string>
-    <key>UIRequiredDeviceCapabilities</key>
-    <array>
-      <string>arm64</string>
-    </array>
     <key>UIRequiresFullScreen</key>
     <false/>
-    <key>UIStatusBarStyle</key>
-    <string>UIStatusBarStyleDefault</string>
     <key>UISupportedInterfaceOrientations</key>
     <array>
       <string>UIInterfaceOrientationPortrait</string>
@@ -97,7 +271,5 @@
     </array>
     <key>UIUserInterfaceStyle</key>
     <string>Automatic</string>
-    <key>UIViewControllerBasedStatusBarAppearance</key>
-    <false/>
   </dict>
 </plist>

@@ -237,7 +237,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>exp+ww</string>
+          <string>exp+frontend</string>
         </array>
       </dict>
     </array>

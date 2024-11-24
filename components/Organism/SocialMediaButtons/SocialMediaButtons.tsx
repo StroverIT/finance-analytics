@@ -7,14 +7,13 @@ import Google from "@/assets/images/icons/google.svg";
 import Facebook from "@/assets/images/icons/facebook.svg";
 
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import { auth } from "@/lib/firebaseConfig";
+import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
 
 GoogleSignin.configure({
-  webClientId:
-    "976590757431-e608bud18h45cf9rsfl820qqt32s420b.apps.googleusercontent.com",
-  // androidClientId:
-  //   "976590757431-stf2pp8atmt7j47e04vt5afr9qplkmus.apps.googleusercontent.com",
-  // iosClientId:
-  //   "976590757431-eeon3frn6neugqkhtk2bt6vsom5706bd.apps.googleusercontent.com",
+  webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
+  // androidClientId: process.env.EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID,
+  iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
 });
 
 export const SocialMediaButtons: FC<SocialMediaButtonsProps> = ({
@@ -23,7 +22,12 @@ export const SocialMediaButtons: FC<SocialMediaButtonsProps> = ({
   const googlePressHandler = async () => {
     try {
       await GoogleSignin.hasPlayServices();
-      const user = await GoogleSignin.signIn();
+
+      await GoogleSignin.signIn();
+      const { accessToken, idToken } = await GoogleSignin.getTokens();
+      const credential = GoogleAuthProvider.credential(idToken, accessToken);
+
+      await signInWithCredential(auth, credential);
     } catch (error) {
       console.log(error);
     }

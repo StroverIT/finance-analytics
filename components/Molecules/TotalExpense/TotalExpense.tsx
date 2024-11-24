@@ -16,7 +16,7 @@ export const TotalExpense = () => {
     <View className=" bg-white px-2 py-4 my-4 rounded-xl">
       <Text className="font-semibold text-lg">Похарчени пари за месеца</Text>
       <Text className="text-3xl mt-2 font-semibold text-[#352DFF]">
-        {totalBudget.data?.totalExpense}
+        {totalBudget.data?.totalExpense?.toFixed(2)}
       </Text>
     </View>
   );

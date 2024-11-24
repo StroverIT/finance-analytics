@@ -30,7 +30,7 @@ export const Chart: FC<ChartProps> = ({ selectedMonth }) => {
         labelComponent: () => (
           <View className="">
             <Text className="text-[#514BF3] text-center font-semibold">
-              {week1}
+              {week1?.toFixed(2)}
             </Text>
             <Text className="text-[#514BF3] text-center font-semibold">
               Сед 1
@@ -43,7 +43,7 @@ export const Chart: FC<ChartProps> = ({ selectedMonth }) => {
         labelComponent: () => (
           <View className="">
             <Text className="text-[#514BF3] text-center font-semibold">
-              {week2}
+              {week2?.toFixed(2)}
             </Text>
             <Text className="text-[#514BF3] text-center font-semibold">
               Сед 2
@@ -56,7 +56,7 @@ export const Chart: FC<ChartProps> = ({ selectedMonth }) => {
         labelComponent: () => (
           <View className="">
             <Text className="text-[#514BF3] text-center font-semibold">
-              {week3}
+              {week3?.toFixed(2)}
             </Text>
             <Text className="text-[#514BF3] text-center font-semibold">
               Сед 3
@@ -69,7 +69,7 @@ export const Chart: FC<ChartProps> = ({ selectedMonth }) => {
         labelComponent: () => (
           <View className="">
             <Text className="text-[#514BF3] text-center font-semibold">
-              {week4}
+              {week4?.toFixed(2)}
             </Text>
             <Text className="text-[#514BF3] text-center font-semibold">
               Сед 4

@@ -31,7 +31,7 @@ export const TotalBudged = () => {
   return (
     <View className="bg-white p-4">
       <Text className="text-xl font-semibold">Общ бюджет</Text>
-      <View className="mb-3 mt-10">
+      <View className="mb-3 mt-6">
         <View className="items-center justify-center flex-row  ">
           <Text className="text-3xl mr-1">
             <Text className="text-[#352DFF]">
@@ -50,7 +50,7 @@ export const TotalBudged = () => {
           </Text>
         </View>
       </View>
-      <View className="w-full items-center mb-4">
+      <View className="w-full items-center mb-6">
         <ProgressBar progress={totalBudget.data?.differenceInPercentage} />
       </View>
       <ShowAllAccounts />

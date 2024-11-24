@@ -123,6 +123,7 @@ router.post<{}, FinanceGetAll>("/totalBudget", async (req, res) => {
 
     let startDate,
       endDate,
+      daysLeft,
       totalIncome = 0,
       totalExpense = 0;
 
@@ -133,6 +134,11 @@ router.post<{}, FinanceGetAll>("/totalBudget", async (req, res) => {
       startDate = new Date(currentDate.getFullYear(), currentMonth - 1, 11);
       endDate = new Date(currentDate.getFullYear(), currentMonth, 10);
     }
+
+    const millisecondsPerDay = 1000 * 60 * 60 * 24;
+    const millisecondsDifference = endDate.getTime() - currentDate.getTime();
+
+    daysLeft = Math.ceil(millisecondsDifference / millisecondsPerDay);
 
     const finances = await Finance.find({
       userId,
@@ -151,7 +157,7 @@ router.post<{}, FinanceGetAll>("/totalBudget", async (req, res) => {
     });
 
     const difference = totalIncome - totalExpense;
-    const moneyLeftPerDay = difference / 30;
+    const moneyLeftPerDay = difference / daysLeft;
     const differenceInPercentage = totalExpense / totalIncome;
 
     res.json({

@@ -3,31 +3,13 @@
     "development": {
       "developmentClient": true,
       "distribution": "internal",
-      "env": {
-        "EXPO_PUBLIC_SERVER_IP": "http://192.168.1.2:3000/api/v1",
-        "EXPO_PUBLIC_FIREBASE_API_KEY": "AIzaSyDGSAA2GPaeIJT88dVM2bRRm2kvi9wWx94",
-        "EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN": "finance-8cf44.firebaseapp.com",
-        "EXPO_PUBLIC_FIREBASE_PROJECT_ID": "finance-8cf44",
-        "EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET": "finance-8cf44.firebasestorage.app",
-        "EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID": "304528288925",
-        "EXPO_PUBLIC_FIREBASE_APP_ID": "1:304528288925:web:97d6255a3976385c86b874",
-        "EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID": "G-PKDCCYH7L7"
-      }
+      "environment": "development"
     },
     "preview": {
       "distribution": "internal"
     },
     "production": {
-      "env": {
-        "EXPO_PUBLIC_SERVER_IP": "https://finance-analytics-two.vercel.app/api/v1",
-        "EXPO_PUBLIC_FIREBASE_API_KEY": "AIzaSyDGSAA2GPaeIJT88dVM2bRRm2kvi9wWx94",
-        "EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN": "finance-8cf44.firebaseapp.com",
-        "EXPO_PUBLIC_FIREBASE_PROJECT_ID": "finance-8cf44",
-        "EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET": "finance-8cf44.firebasestorage.app",
-        "EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID": "304528288925",
-        "EXPO_PUBLIC_FIREBASE_APP_ID": "1:304528288925:web:97d6255a3976385c86b874",
-        "EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID": "G-PKDCCYH7L7"
-      },
+      "environment": "production",
       "android": {
         "buildType": "apk"
       }

@@ -183,7 +183,8 @@ router.get<{}, GetRecentTransactionsResponse>(
     })
       .populate<CategorySchemaType>("category")
       .populate<AccountBalanceSchemaType>("accountBalance")
-      .limit(10);
+      .limit(10)
+      .sort({ createdAt: -1 });
 
     res.json(finances as unknown as FinancePopulatedType[]);
   }
@@ -205,7 +206,8 @@ router.get<{}, FinancesGetMonthlyTransactionsResponse>(
       },
     })
       .populate<CategorySchemaType>("category")
-      .populate<AccountBalanceSchemaType>("accountBalance");
+      .populate<AccountBalanceSchemaType>("accountBalance")
+      .sort({ createdAt: -1 });
 
     const weeks: WeeksType = {
       week1: [],

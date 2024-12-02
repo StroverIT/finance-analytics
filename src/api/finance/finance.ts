@@ -139,22 +139,26 @@ router.post<{}, FinanceGetAll>("/totalBudget", async (req, res) => {
     const millisecondsDifference = endDate.getTime() - currentDate.getTime();
 
     daysLeft = Math.ceil(millisecondsDifference / millisecondsPerDay);
-
     const finances = await Finance.find({
       userId,
       createdAt: {
         $gte: startDate,
         $lt: endDate,
       },
+      type: FinanceTypeEnum.EXPENSE,
     });
 
-    finances.forEach((finance) => {
-      if (finance.type === FinanceTypeEnum.INCOME)
-        return (totalIncome += finance.price);
-
-      if (finance.type === FinanceTypeEnum.EXPENSE)
-        return (totalExpense += finance.price);
+    const accountBalances = await AccountBalance.find({
+      userId,
     });
+
+    for (let i = 0; i < finances.length; i++) {
+      totalExpense += finances[i].price;
+    }
+
+    for (let i = 0; i < accountBalances.length; i++) {
+      totalIncome += accountBalances[i].balance;
+    }
 
     const difference = totalIncome - totalExpense;
     const moneyLeftPerDay = difference / daysLeft;

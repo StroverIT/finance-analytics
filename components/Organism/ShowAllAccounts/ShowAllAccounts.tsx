@@ -25,7 +25,7 @@ export const ShowAllAccounts = () => {
           />
           <View>
             <Text className="text-xl font-semibold -mb-2">{acc.name}</Text>
-            <Text className="text-lg">{acc.balance} лв</Text>
+            <Text className="text-lg">{acc.balance.toFixed(2)} лв</Text>
           </View>
         </View>
       ))}

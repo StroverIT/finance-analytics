@@ -36,19 +36,15 @@ class MyAppWidgetProvider : AppWidgetProvider() {
         val sharedPreferences = context.getSharedPreferences("WidgetData", Context.MODE_PRIVATE)
         val jsonString = sharedPreferences.getString("widget_text", null)
 
-        var expense = 0.00
         var income = 0.00
         var moneyLeftPerDay = 0.00
-        var difference = 0.00
 
         if (jsonString != null) {
             try {
                 // Parse the JSON string to access properties
                 val jsonObject = JSONObject(jsonString)
-                expense = jsonObject.getDouble("totalExpense")
                 income = jsonObject.getDouble("totalIncome")
                 moneyLeftPerDay = jsonObject.getDouble("moneyLeftPerDay")
-                difference = jsonObject.getDouble("difference")
 
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -59,8 +55,8 @@ class MyAppWidgetProvider : AppWidgetProvider() {
             val views = RemoteViews(context.packageName, R.layout.widget_layout)
 
             // Set the new data to the TextView in the widget layout
-            views.setTextViewText(R.id.expenseIncomeTextView, String.format("%.2f / %.2f", expense, income))
-            views.setTextViewText(R.id.moneyLeftAndPerDay, String.format("Оставащи: %.2f    %.2f / ден ", difference, moneyLeftPerDay))
+            views.setTextViewText(R.id.incomeTextView, String.format("%.2f", income))
+            views.setTextViewText(R.id.moneyLeftPerDay, String.format("%.2f / ден ", moneyLeftPerDay))
 
             
             // Apply the changes to the widget

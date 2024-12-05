@@ -11,11 +11,8 @@ type ErrorType = {
 export type FinanceResponseCreate = MessageType | ErrorType;
 
 export type FinanceGetAll = {
-  difference: number;
   totalIncome: number;
-  totalExpense: number;
   moneyLeftPerDay: number;
-  differenceInPercentage: number;
 };
 
 export type WeeksType = {

@@ -121,55 +121,34 @@ router.post<{}, FinanceGetAll>("/totalBudget", async (req, res) => {
     const currentDay = currentDate.getDate();
     const currentMonth = currentDate.getMonth();
 
-    let startDate,
-      endDate,
+    let endDate,
       daysLeft,
-      totalIncome = 0,
-      totalExpense = 0;
+      totalIncome = 0;
 
-    if (currentDay >= 11) {
-      startDate = new Date(currentDate.getFullYear(), currentMonth, 11);
-      endDate = new Date(currentDate.getFullYear(), currentMonth + 1, 10);
-    } else {
-      startDate = new Date(currentDate.getFullYear(), currentMonth - 1, 11);
-      endDate = new Date(currentDate.getFullYear(), currentMonth, 10);
-    }
+    endDate = new Date(
+      currentDate.getFullYear(),
+      currentDay >= 11 ? currentMonth + 1 : currentMonth,
+      10
+    );
 
     const millisecondsPerDay = 1000 * 60 * 60 * 24;
     const millisecondsDifference = endDate.getTime() - currentDate.getTime();
 
     daysLeft = Math.ceil(millisecondsDifference / millisecondsPerDay);
-    const finances = await Finance.find({
-      userId,
-      createdAt: {
-        $gte: startDate,
-        $lt: endDate,
-      },
-      type: FinanceTypeEnum.EXPENSE,
-    });
 
     const accountBalances = await AccountBalance.find({
       userId,
     });
 
-    for (let i = 0; i < finances.length; i++) {
-      totalExpense += finances[i].price;
-    }
-
     for (let i = 0; i < accountBalances.length; i++) {
       totalIncome += accountBalances[i].balance;
     }
 
-    const difference = totalIncome - totalExpense;
-    const moneyLeftPerDay = difference / daysLeft;
-    const differenceInPercentage = totalExpense / totalIncome;
+    const moneyLeftPerDay = totalIncome / daysLeft;
 
     res.json({
       totalIncome,
-      totalExpense,
-      difference,
       moneyLeftPerDay,
-      differenceInPercentage,
     });
   } catch (e) {
     console.log("Error:", e);

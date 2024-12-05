@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getTotalBudget } from "@/API/finance";
 import { AppContext } from "@/hooks/context/useAppProvider/useAppProvider";
-import ProgressBar from "@/components/Molecules/ProgressBar";
 import Edit from "@/assets/images/icons/edit.svg";
 
 export const ShowTotalAndLeftMoney = () => {

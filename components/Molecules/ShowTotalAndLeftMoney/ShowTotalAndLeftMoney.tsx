@@ -13,6 +13,7 @@ export const ShowTotalAndLeftMoney = () => {
     queryKey: ["totalBudget"],
     queryFn: getTotalBudget.bind(null, user?.uid as string),
   });
+
   return (
     <>
       <Text className="text-xl font-semibold">Общ бюджет</Text>
@@ -20,23 +21,16 @@ export const ShowTotalAndLeftMoney = () => {
         <View className="items-center justify-center flex-row  ">
           <Text className="text-3xl mr-1">
             <Text className="text-[#352DFF]">
-              {totalBudget.data?.totalExpense?.toFixed(2)}
-            </Text>{" "}
-            / {totalBudget.data?.totalIncome?.toFixed(2)}
+              {totalBudget.data?.totalIncome?.toFixed(2)}
+            </Text>
           </Text>
           <Edit className="w-6 h-6" />
         </View>
         <View className="flex-row items-center justify-center gap-10">
           <Text className="">
-            Остащи: {totalBudget.data?.difference?.toFixed(2)}
-          </Text>
-          <Text className="">
             {totalBudget.data?.moneyLeftPerDay.toFixed(2)} лв / ден
           </Text>
         </View>
-      </View>
-      <View className="w-full items-center mb-6">
-        <ProgressBar progress={totalBudget.data?.differenceInPercentage} />
       </View>
     </>
   );

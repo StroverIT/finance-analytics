@@ -5,6 +5,7 @@ import { CategorySchemaType } from "../Category/types";
 export enum FinanceTypeEnum {
   INCOME = "income",
   EXPENSE = "expense",
+  TRANSFER = "transfer",
 }
 
 export type ArticleType = {
@@ -19,7 +20,7 @@ export interface FinanceSchemaType extends ArticleType {
   article: string;
   accountBalance: ObjectId;
   category: ObjectId;
-
+  balanceTo?: ObjectId;
   type: FinanceTypeEnum;
 
   createdAt: Date;

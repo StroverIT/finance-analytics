@@ -19,7 +19,15 @@ const FinanceScheme = new Schema<FinanceSchemaType>({
   },
   type: {
     type: String,
-    enum: [FinanceTypeEnum.INCOME, FinanceTypeEnum.EXPENSE],
+    enum: [
+      FinanceTypeEnum.INCOME,
+      FinanceTypeEnum.EXPENSE,
+      FinanceTypeEnum.TRANSFER,
+    ],
+  },
+  balanceTo: {
+    type: Schema.Types.ObjectId,
+    ref: "AccountBalance",
   },
   createdAt: {
     type: Date,

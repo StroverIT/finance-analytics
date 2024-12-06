@@ -88,12 +88,21 @@ router.post<{}, FinanceResponseCreate>("/transfer", async (req, res) => {
       },
     };
 
-    await AccountBalance.updateOne(
+    const accountBalanceTo = await AccountBalance.findOneAndUpdate(
       {
         _id: new ObjectId(to),
       },
       incConditionTo
     );
+
+    await Finance.create({
+      userId: accountBalanceTo?.userId,
+      balanceTo: new ObjectId(to),
+      accountBalance: new ObjectId(from),
+      article: "Трансфер",
+      price: parseFloat(amount),
+      type: FinanceTypeEnum.TRANSFER,
+    });
 
     res.json({
       message: "Успешно",
@@ -165,7 +174,7 @@ router.get<{}, GetRecentTransactionsResponse>(
       userId,
     })
       .populate<CategorySchemaType>("category")
-      .populate<AccountBalanceSchemaType>("accountBalance")
+      .populate<AccountBalanceSchemaType>("accountBalance balanceTo")
       .limit(10)
       .sort({ createdAt: -1 });
 

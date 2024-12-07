@@ -22,7 +22,9 @@ export const RecentTransaction: FC<RecentTransactionType> = ({
   const icon = isTransfer ? item.accountBalance.icon : item.category?.icon;
   const name = isTransfer ? item.accountBalance.name : item.category?.name;
 
-  const balanceToIcon = isTransfer ? item.balanceTo?.icon : item.category?.icon;
+  const balanceToIcon = isTransfer
+    ? item.balanceTo?.icon
+    : item.accountBalance.icon;
 
   return (
     <View

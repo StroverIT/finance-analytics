@@ -10,7 +10,8 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
-    "reverseProxy": "adb reverse tcp:3000 tcp:3000"
+    "reverseProxy": "adb reverse tcp:3000 tcp:3000",
+    "deploy:android:prod": "eas build -p android --profile production"
   },
   "jest": {
     "preset": "jest-expo"

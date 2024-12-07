@@ -7,10 +7,7 @@ import Button from "@/components/Atoms/Button";
 import { useQuery } from "@tanstack/react-query";
 import { getAccountBalance } from "@/API/account/account";
 import { AppContext } from "@/hooks/context/useAppProvider/useAppProvider";
-import {
-  DropDownWithSearchRefType,
-  RefDropDownType,
-} from "@/components/Atoms/DropDownWithSearch/types";
+import { DropDownWithSearchRefType } from "@/components/Atoms/DropDownWithSearch/types";
 import { transferAccountBalance } from "@/API/finance";
 import { TransferDataType } from "@/API/finance/types";
 import { router } from "expo-router";

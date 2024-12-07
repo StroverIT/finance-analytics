@@ -56,7 +56,8 @@ export type FinancePopulatedType = Omit<
   "accountBalance" | "category"
 > & {
   accountBalance: AccountBalanceSchemaType;
-  category: CategorySchemaType;
+  category?: CategorySchemaType;
+  balanceTo?: AccountBalanceSchemaType;
 };
 
 export type RecentTransactionType = (

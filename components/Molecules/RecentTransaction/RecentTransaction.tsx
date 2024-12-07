@@ -17,6 +17,12 @@ export const RecentTransaction: FC<RecentTransactionType> = ({
 
   const expenseStyle = "text-red-500";
   const isExpense = item.type === FinanceTypeEnum.EXPENSE;
+  const isTransfer = item.type === FinanceTypeEnum.TRANSFER;
+
+  const icon = isTransfer ? item.accountBalance.icon : item.category?.icon;
+  const name = isTransfer ? item.accountBalance.name : item.category?.name;
+
+  const balanceToIcon = isTransfer ? item.balanceTo?.icon : item.category?.icon;
 
   return (
     <View
@@ -25,19 +31,19 @@ export const RecentTransaction: FC<RecentTransactionType> = ({
       <View className="flex-row items-center">
         <Image
           className="h-10 w-10"
-          source={{ uri: item.category.icon }}
+          source={{ uri: icon }}
           style={{
             objectFit: "contain",
           }}
         />
         <View className="flex-col">
-          <Text className="text-lg ml-2">{item.category.name}</Text>
+          <Text className="text-lg ml-2">{name}</Text>
           <Text className="text-sm ml-2">{dateFormatted}</Text>
         </View>
       </View>
       <View className="flex-row items-center">
         <Image
-          source={{ uri: item.accountBalance.icon }}
+          source={{ uri: balanceToIcon }}
           className="h-5 w-5 mr-4"
           style={{
             objectFit: "contain",

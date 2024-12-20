@@ -40,12 +40,25 @@ const TransactionScreen = () => {
       data: value,
     })) as TransformedMonthlyTransactions[];
 
-    const filteredArray = transformedArray.filter(
-      (item) => item.data?.length > 0
-    );
+    const filteredArray = transformedArray.filter((item) => {
+      const selectedCategoryToLowerCase = selectedCategory.toLocaleLowerCase();
+
+      if (selectedCategoryToLowerCase !== "виж всички") {
+        const filteredData = item.data?.filter(
+          (transaction) =>
+            transaction.category?.name.toLocaleLowerCase() ===
+            selectedCategoryToLowerCase
+        );
+        return (item.data = filteredData);
+      } else if (
+        item.data?.length > 0 &&
+        selectedCategory.toLocaleLowerCase() === "виж всички"
+      )
+        return true;
+    });
 
     return filteredArray.reverse();
-  }, [monthlyTransactions.data]);
+  }, [monthlyTransactions.data, selectedCategory]);
 
   return (
     <View className="mt-4 mx-4">

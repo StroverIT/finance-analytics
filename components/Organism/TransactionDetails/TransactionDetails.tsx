@@ -1,46 +1,11 @@
 import { View, Text, FlatList, Image, Pressable } from "react-native";
-import React, { useContext, useMemo, useState } from "react";
+import React, { useContext } from "react";
 import DropDown from "@/components/Molecules/DropDown";
-import useMonthlyDropDown from "@/hooks/useMonthlyDropDown";
 import { useQuery } from "@tanstack/react-query";
 import { getCategory } from "@/API/category";
 import { AppContext } from "@/hooks/context/useAppProvider/useAppProvider";
 import { CategorySchemaType } from "@/API/category/types";
 import { TransactionContext } from "@/hooks/context/useTransactionProvider";
-
-const data = [
-  {
-    id: "0",
-    icon: "icon",
-    category: "Виж всички",
-    isSelected: true,
-    isViewAll: true,
-  },
-  {
-    id: "1",
-    icon: "icon",
-    category: "Храна",
-    isSelected: false,
-  },
-  {
-    id: "2",
-    icon: "icon",
-    category: "Пътуване",
-    isSelected: false,
-  },
-  {
-    id: "3",
-    icon: "icon",
-    category: "Сметки",
-    isSelected: false,
-  },
-  {
-    id: "4",
-    icon: "icon",
-    category: "Няма брато нещо",
-    isSelected: false,
-  },
-];
 
 export const TransactionDetails = () => {
   const {

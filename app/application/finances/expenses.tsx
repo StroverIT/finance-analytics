@@ -26,7 +26,7 @@ const expenses = () => {
         showsHorizontalScrollIndicator={false}
       >
         <HeaderWithBackBtn title="Разходи" />
-        <View className="my-4">
+        <View className="mt-4">
           <Button
             text="Добави снимка на сметката"
             onPress={uploadImageHandler}
@@ -34,7 +34,11 @@ const expenses = () => {
           />
           {image && <Image source={{ uri: image }} className="h-24 w-full" />}
         </View>
-        <View className="gap-4">
+        <CategoryWithAccountInputs
+          accountRef={accountRef}
+          categoryRef={categoryRef}
+        />
+        <View className="gap-4 mt-4">
           <ArticleInput
             price={article.price}
             type={article.type}
@@ -42,10 +46,7 @@ const expenses = () => {
             onChange={onArticleChange}
           />
         </View>
-        <CategoryWithAccountInputs
-          accountRef={accountRef}
-          categoryRef={categoryRef}
-        />
+
         <View className="mt-4">
           <Button text="Изпрати" onPress={submitHandler} />
         </View>

@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import React, { FC, useContext, useRef } from "react";
+import React, { FC, useContext } from "react";
 import DropDownWithSearch from "@/components/Atoms/DropDownWithSearch";
 import Button from "@/components/Atoms/Button";
 import { ColorThemes } from "@/components/Atoms/Button/types";

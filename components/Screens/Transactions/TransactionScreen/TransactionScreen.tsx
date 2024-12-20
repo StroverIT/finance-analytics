@@ -43,7 +43,8 @@ const TransactionScreen = () => {
     const filteredArray = transformedArray.filter(
       (item) => item.data?.length > 0
     );
-    return filteredArray;
+
+    return filteredArray.reverse();
   }, [monthlyTransactions.data]);
 
   return (
